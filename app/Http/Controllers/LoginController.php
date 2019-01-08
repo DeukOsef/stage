@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Client;
+use App\Model;
+use App\Modell;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -22,23 +23,25 @@ class LoginController extends BaseController
 
     public function connexion(Request $request){
 
-        $email = $request->get('email');
+        $login = $request->get('login');
         $password = $request->get('password');
 
-        $user = Client::getUser($email,$password);
+        $user = Modell::getUser($login,$password);
 
-        if ($user && $user->admin == 1){
-            Session::put('client',Client::getName($email));
-            return redirect('/admin');
-
-        }else if ($user && $user->admin == 0){
-            Session::put('client',Client::getName($email));
-            return redirect('/user');
-
+        if ($user){
+            Session::put('client',Modell::getName($login));
+            return redirect('/accueil');
         }else{
             return redirect('/')->with('errPwd','Adresse mail ou mot de passe eronné');
         }
 
+    }
+
+    public function logout(){
+
+        Session::forget('client');
+        redirect('/');
+        return 'ok';
     }
 
 }

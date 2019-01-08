@@ -16,10 +16,10 @@
                             @endif
 
                             <div class="form-group row">
-                                <label for="email" class="col-sm-4 col-form-label text-md-right">Login</label>
+                                <label for="login" class="col-sm-4 col-form-label text-md-right">Login</label>
 
                                 <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
+                                    <input id="login" type="login" class="form-control" name="login" value="{{ old('login') }}" required autofocus>
                                 </div>
                             </div>
 

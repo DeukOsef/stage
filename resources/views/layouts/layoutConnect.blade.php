@@ -35,7 +35,7 @@
         <a class="float-left" style="color: rgba(255,255,255,0); cursor: default" href="https://www.youtube.com/watch?v=im01JMGSWVg">NNNN</a>
         <div class="container">
 
-            <a class="navbar-brand" href="{{ url('/user') }}">
+            <a class="navbar-brand" href="{{ url('/accueil') }}">
                 MDPH
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,11 +48,13 @@
 
                 </ul>
 
+                <div class="nav-link" style="color: black"><b>{{session()->get('client')->prenom}} {{session()->get('client')->nom}}</b></div>
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
                     <!-- Authentication Links -->
+
                     @guest
-                        <li><a class="nav-link" id='logout' href="/">Déconnexion</a></li>
+                        <li><a class="nav-link" id='logout' href="/logout">Déconnexion</a></li>
                     @else
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

@@ -14,4 +14,6 @@
 
 //PAGE LOGIN
 Route::any('/', 'LoginController@renderLogin');
-
+Route::any('/login', 'LoginController@connexion');
+Route::any('/accueil','AccueilController@renderAccueil');
+Route::any('/logout','LoginController@logout');
