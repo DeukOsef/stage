@@ -13,13 +13,13 @@ use DB;
 use DataTables;
 use Illuminate\Support\Facades\Session;
 
-class AccueilController extends BaseController
+class EmprunterController extends BaseController
 {
 
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function renderAccueil(Request $request){
-        return view('accueil');
+    public function renderEmprunter(Request $request){
+        return view('emprunter');
     }
 
 }

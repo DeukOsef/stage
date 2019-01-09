@@ -5,24 +5,34 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Connection</div>
+                    <div class="card-header">Accueil</div>
                     <div class="card-body">
-                        VOUS ETES CONNECTES
-                        <div class="row justify-content" style="height: 750px; margin-top: 30px" >
-                            <div class="col-md-1"></div>
-                            <div class="col-md-7">
-                                <div class="row">
-                                    <table class="table table-hover table-bordered table-striped datatable">
-                                        <thead>
-                                        <tr>
-                                            <th>idEmprunt</th>
-                                            <th>idObjet</th>
-                                            <th>idUser</th>
-                                            <th>DateDeb</th>
-                                            <th>DateFin</th>
-                                        </tr>
-                                        </thead>
-                                    </table>
+
+                        <div class="container">
+                            <div class="row ">
+                                <div class="col-md-8">
+                                    <a type="button" class="btn btn-secondary btn-lg" style="width: 190px" href="{{url('/emprunter')}}">Emprunter</a>
+                                </div>
+                                <div class="col-md-4">
+                                    <a type="button" class="btn btn-secondary btn-lg" style="width: 190px">Rendre du Materiel</a>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row ">
+                                <div class="col-md-8">
+                                    <a type="button" class="btn btn-secondary btn-lg" style="width: 190px">Liste des objets</a>
+                                </div>
+                                <div class="col-md-4">
+                                    <a type="button" class="btn btn-secondary btn-lg" style="width: 190px">Créer un Objet</a>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row ">
+                                <div class="col-md-4">
+                                </div>
+                                <div class="col-md-6">
+                                    <a type="button" class="btn btn-secondary btn-lg" style="width: 190px" href="{{url('/mesEmprunts')}}">Mes emprunts</a>
+
                                 </div>
                             </div>
                         </div>
@@ -31,24 +41,5 @@
             </div>
         </div>
     </div>
-
-    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-
-            $.noConflict();
-            $('.datatable').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: '{{ route('getEmprunt') }}',
-                columns: [
-                    {data: 'idEmprunt', name: 'idEmprunt'},
-                    {data: 'idObjet', name: 'idObjet'},
-                    {data: 'idUser', name: 'idUser'},
-                    {data: 'dateDeb', name: 'dateDeb'},
-                    {data: 'dateFin', name: 'dateFin'},
-                    ]
-            });
-        });
-    </script>
 @endsection
+

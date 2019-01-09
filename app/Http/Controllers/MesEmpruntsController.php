@@ -13,13 +13,24 @@ use DB;
 use DataTables;
 use Illuminate\Support\Facades\Session;
 
-class AccueilController extends BaseController
+class MesEmpruntsController extends BaseController
 {
 
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function renderAccueil(Request $request){
-        return view('accueil');
+    public function renderMesEmprunts(Request $request){
+        return view('MesEmprunts');
+    }
+
+
+
+
+
+    public function getEmprunt(){
+        $demandes = Modell::getEmprunt(session()->get('client')->idUser);
+
+        return DataTables::of($demandes)
+            ->make(true);
     }
 
 }

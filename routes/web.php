@@ -17,4 +17,6 @@ Route::any('/', 'LoginController@renderLogin');
 Route::any('/login', 'LoginController@connexion');
 Route::any('/accueil','AccueilController@renderAccueil');
 Route::any('/logout','LoginController@logout');
-Route::any('/getEmprunt', 'AccueilController@getEmprunt')->name('getEmprunt');
+Route::any('/mesEmprunts','MesEmpruntsController@renderMesEmprunts');
+Route::any('/getEmprunt', 'MesEmpruntsController@getEmprunt')->name('getEmprunt');
+Route::any('/emprunter','EmprunterController@renderEmprunter');
