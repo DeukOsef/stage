@@ -15,22 +15,40 @@
                                     <table class="table table-hover table-bordered table-striped datatable">
                                         <thead>
                                         <tr>
-                                            <th>Id</th>
-                                            <th>Nom</th>
-                                            <th>Prenom</th>
-                                            <th>Date Debut</th>
-                                            <th>Date Fin</th>
-                                            <th>id Objet</th>
-                                            <th>type</th>
+                                            <th>idEmprunt</th>
+                                            <th>idObjet</th>
+                                            <th>idUser</th>
+                                            <th>DateDeb</th>
+                                            <th>DateFin</th>
                                         </tr>
                                         </thead>
                                     </table>
                                 </div>
                             </div>
-
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            $.noConflict();
+            $('.datatable').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: '{{ route('getEmprunt') }}',
+                columns: [
+                    {data: 'idEmprunt', name: 'idEmprunt'},
+                    {data: 'idObjet', name: 'idObjet'},
+                    {data: 'idUser', name: 'idUser'},
+                    {data: 'dateDeb', name: 'dateDeb'},
+                    {data: 'dateFin', name: 'dateFin'},
+                    ]
+            });
+        });
+    </script>
 @endsection

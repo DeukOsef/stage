@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Model;
 use App\Modell;
+
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use DB;
+use DataTables;
 use Illuminate\Support\Facades\Session;
 
 class AccueilController extends BaseController
@@ -21,12 +22,15 @@ class AccueilController extends BaseController
         return view('accueil');
     }
 
+
+
+
+
     public function getEmprunt(){
-        $demandes = Modell::getEmprunt(Session::get('client')->idUser);
+        $demandes = Modell::getEmprunt(session()->get('client')->idUser);
 
-
-
-        return DataTables::of($demandes);
+        return DataTables::of($demandes)
+            ->make(true);
     }
 
 }
