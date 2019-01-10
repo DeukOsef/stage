@@ -7,7 +7,11 @@
                 <div class="card">
                     <div class="card-header">Accueil</div>
                     <div class="card-body">
-
+                        @if(session('demenv'))
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-form-label text-md-center"style="color: green"><b>{{session('demenv')}}</b></label>
+                            </div>
+                        @endif
                         <div class="container">
                             <div class="row ">
                                 <div class="col-md-8">

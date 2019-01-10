@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Modell;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -42,5 +43,19 @@ class EmprunterController extends BaseController
         }
 
         return $html;
+    }
+
+    public function emprunt(Request $request){
+
+        $idUser = $request->get('idUser');
+        $nom = $request->get('nom');
+        $prenom = $request->get('prenom');
+        $dateDeb = $request->get('dateDeb');
+        $objet = $request->get('objet');
+
+
+        Modell::emprunt($idUser, $nom, $prenom, $dateDeb, $objet);
+
+        return redirect('/accueil')->with('demenv', 'Votre emprunt a été accordé');
     }
 }

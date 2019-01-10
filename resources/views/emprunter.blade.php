@@ -6,7 +6,7 @@
                 <div class="card">
                     <div class="card-header">Nouvel emprunt</div>
                     <div class="card-body">
-                        <form method="POST" action="{{url('/demande')}}" enctype="multipart/form-data">
+                        <form method="POST" action="{{url('/emprunt')}}" enctype="multipart/form-data">
                             @csrf
                             @if(session('demenv'))
                                 <div class="form-group row">
@@ -33,13 +33,13 @@
                                 <label for="dateDeb" class="col-md-4 col-form-label text-md-right">date debut</label>
 
                                 <div class="col-md-6">
-                                    <input id="dateDeb" type="date" class="form-control" name="dateDeb" required>
+                                    <input id="dateDeb" type="date" class="form-control" name="dateDeb" value="<?php echo date("Y-m-d");?>" required>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="type" class="col-md-4 col-form-label text-md-right">Type</label>
                                 <div class="col-md-6">
-                                    <select name="type" id="type" class="form-control">
+                                    <select name="type" id="type" class="form-control" required>
                                         <option >--Selectionnez un type--</option>
                                         @foreach($types as $type)
                                             <option value="{{ $type->numType }}">{{ $type->designation}}</option>
@@ -50,7 +50,7 @@
                             <div class="form-group row">
                                 <label for="objet" class="col-md-4 col-form-label text-md-right">Objet</label>
                                 <div class="col-md-6">
-                                    <select name="objet" id="objet" class="form-control">
+                                    <select name="objet" id="objet" class="form-control" required>
                                         <option >--Selectionnez un objet--</option>
                                     </select>
                                 </div>

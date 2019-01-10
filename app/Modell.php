@@ -71,4 +71,27 @@ class Modell extends Model
         return $objet;
     }
 
+    public static function emprunt($idUser, $nom, $prenom, $dateDeb, $objet){
+        $dataInsertDemandeCp = array();
+        $dataInsertDemandeCp['idUser'] = $idUser;
+        $dataInsertDemandeCp['nom'] =$nom;
+        $dataInsertDemandeCp['prenom'] = $prenom;
+        $dataInsertDemandeCp['dateDeb'] = $dateDeb;
+        $dataInsertDemandeCp['idObjet'] = $objet;
+        $dataInsertDemandeCp['nomObjet']=Modell::getNomType($objet)->nomType.'-'.$objet;
+
+        DB::table('emprunt')->insert($dataInsertDemandeCp);
+
+
+
+        return 1;
+    }
+
+    public static function getNomType($idType){
+        $type =DB::table(self::getTableType())
+            ->select('nomType')
+            ->where('numType', '=', $idType)
+            ->first();
+        return $type;
+    }
 }
