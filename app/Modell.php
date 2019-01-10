@@ -83,6 +83,13 @@ class Modell extends Model
         DB::table('emprunt')->insert($dataInsertDemandeCp);
 
 
+        $dataUpdate = array();
+        $dataUpdate['emprunterPar'] = $nom.' '.$prenom;
+        $dataUpdate['dateDeb'] = $dateDeb;
+
+        DB::table('objet')
+            ->where(self::getTableObjet() . '.idObjet', '=', $objet)
+            ->update($dataUpdate);
 
         return 1;
     }
@@ -93,5 +100,15 @@ class Modell extends Model
             ->where('numType', '=', $idType)
             ->first();
         return $type;
+    }
+
+    public static function getEmpruntAll()
+    {
+        $listeObjets = DB::table(self::getTableObjet())
+            ->select(self::getTableObjet().'.nomObjet',self::getTableObjet().'.idObjet',self::getTableEmprunt().'.*')
+            ->join(self::getTableEmprunt(), self::getTableObjet().'.idObjet','=',self::getTableEmprunt().'.idObjet')
+            ->distinct()
+            ->get();
+        return $listeObjets;
     }
 }

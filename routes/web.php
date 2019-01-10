@@ -22,3 +22,7 @@ Route::any('/getEmprunt', 'MesEmpruntsController@getEmprunt')->name('getEmprunt'
 Route::any('/emprunter','EmprunterController@renderEmprunter');
 Route::any('/loadObjet','EmprunterController@loadObjet');
 Route::any('/emprunt','EmprunterController@emprunt');
+
+
+Route::any('/listeObjets','ListeObjetsController@renderListeObjets');
+Route::any('/getEmpruntAll', 'ListeObjetsController@getEmpruntAll')->name('getEmpruntAll');

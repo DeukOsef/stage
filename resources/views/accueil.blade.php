@@ -24,7 +24,7 @@
                             <br>
                             <div class="row ">
                                 <div class="col-md-8">
-                                    <a type="button" class="btn btn-secondary btn-lg" style="width: 190px">Liste des objets</a>
+                                    <a type="button" class="btn btn-secondary btn-lg" style="width: 190px" href="{{url('/listeObjets')}}">Liste des objets</a>
                                 </div>
                                 <div class="col-md-4">
                                     <a type="button" class="btn btn-secondary btn-lg" style="width: 190px">Créer un Objet</a>

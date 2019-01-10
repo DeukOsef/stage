@@ -15,11 +15,9 @@
                                     <table class="table table-hover table-bordered table-striped datatable" style="width:650px">
                                         <thead>
                                         <tr>
-                                            <th>idEmprunt</th>
                                             <th>Objet</th>
                                             <th>Emprunté par</th>
                                             <th>date du debut de l'emprunt</th>
-                                            <th>Date de fin de l'emprunt</th>
                                         </tr>
                                         </thead>
                                     </table>
@@ -40,13 +38,11 @@
             $('.datatable').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '{{ route('getEmprunt') }}',
+                ajax: '{{ route('getEmpruntAll') }}',
                 columns: [
-                    {data: 'idEmprunt', name: 'idEmprunt'},
                     {data: 'nomObjet', name: 'nomObjet'},
                     {data: 'prenom', name: 'prenom'},
                     {data: 'dateDeb', name: 'dateDeb'},
-                    {data: 'dateFin', name: 'dateFin'},
                     ]
             });
         });
