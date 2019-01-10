@@ -20,6 +20,16 @@ class Modell extends Model
         return 'emprunt';
     }
 
+    public static function getTableType()
+    {
+        return 'type';
+    }
+
+    public static function getTableObjet()
+    {
+        return 'objet';
+    }
+
     public static function getUser($login,$password){
 
         $user = DB::table(self::getTableUser())
@@ -44,6 +54,21 @@ class Modell extends Model
             ->where('idUser', '=', $idUser)
             ->get();
         return $demande;
+    }
+
+    public static function getType(){
+        $type =DB::table(self::getTableType())
+            ->select('*')
+            ->get();
+        return $type;
+    }
+
+    public static function getObjet($numType){
+        $objet =DB::table(self::getTableObjet())
+            ->select('*')
+            ->where('type', '=', $numType)
+            ->get();
+        return $objet;
     }
 
 }

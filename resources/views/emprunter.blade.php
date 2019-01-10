@@ -36,8 +36,26 @@
                                     <input id="dateDeb" type="date" class="form-control" name="dateDeb" required>
                                 </div>
                             </div>
-
-                        <div class="form-group row mb-0">
+                            <div class="form-group row">
+                                <label for="type" class="col-md-4 col-form-label text-md-right">Type</label>
+                                <div class="col-md-6">
+                                    <select name="type" id="type" class="form-control">
+                                        <option >--Selectionnez un type--</option>
+                                        @foreach($types as $type)
+                                            <option value="{{ $type->numType }}">{{ $type->designation}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="objet" class="col-md-4 col-form-label text-md-right">Objet</label>
+                                <div class="col-md-6">
+                                    <select name="objet" id="objet" class="form-control">
+                                        <option >--Selectionnez un objet--</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row mb-0">
                                 <div class="col-md-12 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
                                         Envoyer la demande
@@ -51,4 +69,22 @@
         </div>
     </div>
 
+    <script>
+        $(document).ready(function() {
+            $('#type').on('change', function(e) {
+                e.preventDefault();
+                var numType = $('#type').val();
+
+                $.ajax({
+                    url: "{{url('/loadObjet')}}",
+                    type: 'POST',
+                    data: 'numType=' + numType + '&_token=' + "{{ csrf_token() }}",
+                    success: function (html) { // code_html contient le HTML renvoyé
+                        $('#objet').html(html);
+                    }
+                });
+
+            });
+        });
+    </script>
 @endsection

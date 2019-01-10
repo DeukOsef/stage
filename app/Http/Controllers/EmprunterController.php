@@ -18,8 +18,29 @@ class EmprunterController extends BaseController
 
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function renderEmprunter(Request $request){
-        return view('emprunter');
+    public function renderEmprunter(Request $request)
+    {
+
+        // Récupération des informations pour le formulaire
+        $types = Modell::getType();
+
+        // Envoi du formulaire
+        return view('emprunter')->with('types', $types);
+
+
     }
 
+    public function loadObjet(Request $request)
+    {
+        $numType = $request->get('numType');
+        $html = "";
+
+        $allObjets = Modell::getObjet($numType);
+
+        foreach($allObjets as $objet){
+            $html = "<option value='".$objet->idObjet."'>".$objet->nomObjet."</option>";
+        }
+
+        return $html;
+    }
 }
