@@ -30,6 +30,14 @@ class MesEmpruntsController extends BaseController
         $demandes = Modell::getEmprunt(session()->get('client')->idUser);
 
         return DataTables::of($demandes)
+            ->addColumn('etat', function ($demandes) {
+            if($demandes->etat== 1){
+                return 'emprunté';
+            }else if ($demandes->etat == 2){
+                return 'Rendu';
+            }
+        })
+
             ->make(true);
     }
 

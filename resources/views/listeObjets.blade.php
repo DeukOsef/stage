@@ -41,7 +41,7 @@
                 ajax: '{{ route('getEmpruntAll') }}',
                 columns: [
                     {data: 'nomObjet', name: 'nomObjet'},
-                    {data: 'prenom', name: 'prenom'},
+                    {data: 'emprunterPar', name: 'emprunterPar'},
                     {data: 'dateDeb', name: 'dateDeb'},
                     ]
             });

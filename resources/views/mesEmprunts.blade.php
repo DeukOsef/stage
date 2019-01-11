@@ -20,6 +20,7 @@
                                             <th>Emprunté par</th>
                                             <th>date du debut de l'emprunt</th>
                                             <th>Date de fin de l'emprunt</th>
+                                            <th>Etat</th>
                                         </tr>
                                         </thead>
                                     </table>
@@ -47,6 +48,7 @@
                     {data: 'prenom', name: 'prenom'},
                     {data: 'dateDeb', name: 'dateDeb'},
                     {data: 'dateFin', name: 'dateFin'},
+                    {data: 'etat', name: 'etat'}
                     ]
             });
         });

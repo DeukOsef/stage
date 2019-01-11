@@ -79,6 +79,7 @@ class Modell extends Model
         $dataInsertDemandeCp['dateDeb'] = $dateDeb;
         $dataInsertDemandeCp['idObjet'] = $objet;
         $dataInsertDemandeCp['nomObjet']=Modell::getNomType($objet)->nomType.'-'.$objet;
+        $dataInsertDemandeCp['etat']=1;
 
         DB::table('emprunt')->insert($dataInsertDemandeCp);
 
@@ -104,11 +105,23 @@ class Modell extends Model
 
     public static function getEmpruntAll()
     {
-        $listeObjets = DB::table(self::getTableObjet())
-            ->select(self::getTableObjet().'.nomObjet',self::getTableObjet().'.idObjet',self::getTableEmprunt().'.*')
-            ->join(self::getTableEmprunt(), self::getTableObjet().'.idObjet','=',self::getTableEmprunt().'.idObjet')
-            ->distinct()
+//        $listeObjets = DB::table(self::getTableObjet())
+//            ->select(self::getTableObjet().'.nomObjet',self::getTableObjet().'.idObjet',self::getTableEmprunt().'.*')
+//            ->join(self::getTableEmprunt(), self::getTableObjet().'.idObjet','=',self::getTableEmprunt().'.idObjet')
+//            ->distinct()
+//            ->get();
+
+//         $listeObjets = DB::table(self::getTableObjet())
+//            ->select(self::getTableObjet().'.nomObjet',self::getTableObjet().'.idObjet',self::getTableEmprunt().'.*')
+//            ->leftJoin(self::getTableEmprunt(), self::getTableObjet().'.idObjet','=',self::getTableEmprunt().'.idObjet')
+//            ->whereNull(self::getTableEmprunt().'.dateFin')
+//            ->get();
+
+        $listeObjets =DB::table(self::getTableObjet())
+            ->select('nomObjet','emprunterPar','dateDeb')
             ->get();
+
+
         return $listeObjets;
     }
 }
