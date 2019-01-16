@@ -36,9 +36,9 @@ class EmprunterController extends BaseController
         $numType = $request->get('numType');
         $html = "";
 
-        $allObjets = Modell::getObjet($numType);
+        $objets = Modell::getObjet($numType);
 
-        foreach($allObjets as $objet){
+        foreach($objets as $objet){
             $html = "<option value='".$objet->idObjet."'>".$objet->nomObjet."</option>";
         }
 
@@ -47,11 +47,19 @@ class EmprunterController extends BaseController
 
     public function emprunt(Request $request){
 
-        $idUser = $request->get('idUser');
-        $nom = $request->get('nom');
-        $prenom = $request->get('prenom');
-        $dateDeb = $request->get('dateDeb');
-        $objet = $request->get('objet');
+        if ($request->get('codeB') == "") {
+            $idUser = $request->get('idUser');
+            $nom = $request->get('nom');
+            $prenom = $request->get('prenom');
+            $dateDeb = $request->get('dateDeb');
+            $objet = $request->get('objet');
+        }else if ($request->get('codeB') != ""){
+            $idUser = $request->get('idUser');
+            $nom = $request->get('nom');
+            $prenom = $request->get('prenom');
+            $dateDeb = $request->get('dateDeb');
+            $objet = $request->get('codeB');
+        }
 
 
         Modell::emprunt($idUser, $nom, $prenom, $dateDeb, $objet);

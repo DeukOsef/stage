@@ -67,6 +67,7 @@ class Modell extends Model
         $objet =DB::table(self::getTableObjet())
             ->select('*')
             ->where('type', '=', $numType)
+            ->where('etat', '=', 0)
             ->get();
         return $objet;
     }
@@ -105,23 +106,49 @@ class Modell extends Model
 
     public static function getEmpruntAll()
     {
-//        $listeObjets = DB::table(self::getTableObjet())
-//            ->select(self::getTableObjet().'.nomObjet',self::getTableObjet().'.idObjet',self::getTableEmprunt().'.*')
-//            ->join(self::getTableEmprunt(), self::getTableObjet().'.idObjet','=',self::getTableEmprunt().'.idObjet')
-//            ->distinct()
-//            ->get();
-
-//         $listeObjets = DB::table(self::getTableObjet())
-//            ->select(self::getTableObjet().'.nomObjet',self::getTableObjet().'.idObjet',self::getTableEmprunt().'.*')
-//            ->leftJoin(self::getTableEmprunt(), self::getTableObjet().'.idObjet','=',self::getTableEmprunt().'.idObjet')
-//            ->whereNull(self::getTableEmprunt().'.dateFin')
-//            ->get();
-
         $listeObjets =DB::table(self::getTableObjet())
-            ->select('nomObjet','emprunterPar','dateDeb')
+            ->select('idObjet','nomObjet','emprunterPar','dateDeb')
             ->get();
 
 
         return $listeObjets;
     }
+
+    public static function rendreEmprunt($id){
+        $dataUpdate = array();
+        $dataUpdate['etat'] = 2;
+        $dataUpdate['dateFin'] = date("Y-m-d");
+        DB::table('emprunt')
+            ->where(self::getTableEmprunt() . '.idEmprunt', '=', $id)
+            ->update($dataUpdate);
+
+        return 1;
+    }
+
+    public static function creer($dataInsertDemandeCp)
+    {
+        DB::table('objet')->insert($dataInsertDemandeCp);
+        return 1;
+    }
+
+    public static function updateNumero($idType)
+    {
+        $dataUpdate = array();
+        $dataUpdate['numero'] = Modell::getNombreType($idType)->numero+1;
+
+        DB::table('type')
+            ->where(self::getTableType() . '.numType', '=', $idType)
+            ->update($dataUpdate);
+
+        return 1;
+    }
+
+    public static function getNombreType($idType){
+        $type =DB::table(self::getTableType())
+            ->select('numero')
+            ->where('numType', '=', $idType)
+            ->first();
+        return $type;
+    }
+
 }

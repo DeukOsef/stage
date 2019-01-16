@@ -17,7 +17,8 @@
                                         <tr>
                                             <th>Objet</th>
                                             <th>Emprunté par</th>
-                                            <th>date du debut de l'emprunt</th>
+                                            <th class="text-center">dateDeb</th>
+                                            <th class="text-center" width="140px">Imprimer une nouvelle étiquette</th>
                                         </tr>
                                         </thead>
                                     </table>
@@ -43,6 +44,7 @@
                     {data: 'nomObjet', name: 'nomObjet'},
                     {data: 'emprunterPar', name: 'emprunterPar'},
                     {data: 'dateDeb', name: 'dateDeb'},
+                    {data: 'action', name: 'action', orderable: false, searchable: false}
                     ]
             });
         });

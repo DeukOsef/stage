@@ -18,7 +18,7 @@
                                     <a type="button" class="btn btn-secondary btn-lg" style="width: 190px" href="{{url('/emprunter')}}">Emprunter</a>
                                 </div>
                                 <div class="col-md-4">
-                                    <a type="button" class="btn btn-secondary btn-lg" style="width: 190px">Rendre du Materiel</a>
+                                    <a type="button" class="btn btn-secondary btn-lg" style="width: 190px" href="{{url('/mesEmprunts')}}">Mes emprunts</a>
                                 </div>
                             </div>
                             <br>
@@ -27,17 +27,14 @@
                                     <a type="button" class="btn btn-secondary btn-lg" style="width: 190px" href="{{url('/listeObjets')}}">Liste des objets</a>
                                 </div>
                                 <div class="col-md-4">
-                                    <a type="button" class="btn btn-secondary btn-lg" style="width: 190px">Créer un Objet</a>
+                                    <a type="button" class="btn btn-secondary btn-lg" style="width: 190px" href="{{url('/CreationObjet')}}">Créer un Objet</a>
                                 </div>
                             </div>
                             <br>
                             <div class="row ">
                                 <div class="col-md-4">
                                 </div>
-                                <div class="col-md-6">
-                                    <a type="button" class="btn btn-secondary btn-lg" style="width: 190px" href="{{url('/mesEmprunts')}}">Mes emprunts</a>
 
-                                </div>
                             </div>
                         </div>
                     </div>

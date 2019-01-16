@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-header">Connection</div>
                     <div class="card-body">
-                        VOUS ETES CONNECTES
+
                         <div class="row justify-content" style="height: 750px; margin-top: 30px" >
                             <div class="col-md-1"></div>
                             <div class="col-md-7">
@@ -21,6 +21,7 @@
                                             <th>date du debut de l'emprunt</th>
                                             <th>Date de fin de l'emprunt</th>
                                             <th>Etat</th>
+                                            <th>Rendre</th>
                                         </tr>
                                         </thead>
                                     </table>
@@ -48,7 +49,8 @@
                     {data: 'prenom', name: 'prenom'},
                     {data: 'dateDeb', name: 'dateDeb'},
                     {data: 'dateFin', name: 'dateFin'},
-                    {data: 'etat', name: 'etat'}
+                    {data: 'etat', name: 'etat'},
+                    {data: 'action', name: 'action', orderable: false, searchable: false}
                     ]
             });
         });

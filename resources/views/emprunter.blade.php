@@ -25,10 +25,15 @@
                                 <div class="col-md-3">
                                     <input id="nom" type="text" class="form-control" style="color:#495057; background-color:#E9ECEF; border-color:#ced4da; outline:0; -webkit-box-shadow:none;box-shadow:none;" name="nom" value="{{session()->get('client')->nom }}"readonly>
                                 </div>
-
-
                             </div>
 
+                            <div class="row">
+                                <label for="codeB" class="col-md-4 col-form-label text-md-right">Code barre</label>
+                                <div class="col-md-6">
+                                    <input id="codeB" type="text" class="form-control" style="color:#495057; background-color:#E9ECEF; border-color:#ced4da; outline:0; -webkit-box-shadow:none;box-shadow:none;" name="codeB" value="">
+                                </div>
+                            </div>
+                            <br>
                             <div class="form-group row">
                                 <label for="dateDeb" class="col-md-4 col-form-label text-md-right">date debut</label>
 

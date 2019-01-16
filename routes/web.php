@@ -26,3 +26,7 @@ Route::any('/emprunt','EmprunterController@emprunt');
 
 Route::any('/listeObjets','ListeObjetsController@renderListeObjets');
 Route::any('/getEmpruntAll', 'ListeObjetsController@getEmpruntAll')->name('getEmpruntAll');
+Route::any('/rendreEmprunt/{id}','MesEmpruntsController@rendreEmprunt');
+
+Route::any('/CreationObjet','CreationObjetController@renderCreationObjet');
+Route::any('/creer','CreationObjetController@creer');

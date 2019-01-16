@@ -30,6 +30,7 @@ class MesEmpruntsController extends BaseController
         $demandes = Modell::getEmprunt(session()->get('client')->idUser);
 
         return DataTables::of($demandes)
+
             ->addColumn('etat', function ($demandes) {
             if($demandes->etat== 1){
                 return 'emprunté';
@@ -37,8 +38,19 @@ class MesEmpruntsController extends BaseController
                 return 'Rendu';
             }
         })
-
+            ->addColumn('action', function ($demandes) {
+                if($demandes->etat== 1){
+                    return '<a href="'.url('rendreEmprunt').'/'.$demandes->idEmprunt.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Rendre</a>';}
+            })
             ->make(true);
     }
+
+    public function rendreEmprunt($id){
+        Modell::rendreEmprunt($id);
+
+
+        return redirect('/mesEmprunts')->with('deldem','L\'emprunt est terminé, veuuillez ranger l\'objet a son emplacement');
+    }
+
 
 }
