@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
 class LoginController extends BaseController
@@ -27,12 +28,13 @@ class LoginController extends BaseController
         $password = $request->get('password');
 
         $user = Modell::getUser($login,$password);
+        $passd=$user->mdp;
 
-        if ($user){
+        if (Hash::check($password,$passd)){
             Session::put('client',Modell::getName($login));
             return redirect('/accueil');
         }else{
-            return redirect('/')->with('errPwd','Adresse mail ou mot de passe eronné');
+            return redirect('/')->with('errPwd','Login ou mot de passe eronné');
         }
 
     }

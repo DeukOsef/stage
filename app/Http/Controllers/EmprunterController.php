@@ -24,9 +24,9 @@ class EmprunterController extends BaseController
 
         // Récupération des informations pour le formulaire
         $types = Modell::getType();
-
+        $noms = Modell::getAllNoms();
         // Envoi du formulaire
-        return view('emprunter')->with('types', $types);
+        return view('emprunter')->with('types', $types)->with('noms', $noms);
 
 
     }
@@ -39,7 +39,7 @@ class EmprunterController extends BaseController
         $objets = Modell::getObjet($numType);
 
         foreach($objets as $objet){
-            $html = "<option value='".$objet->idObjet."'>".$objet->nomObjet."</option>";
+            $html .= "<option value='".$objet->idObjet."'>".$objet->nomObjet."</option>";
         }
 
         return $html;
@@ -47,23 +47,42 @@ class EmprunterController extends BaseController
 
     public function emprunt(Request $request){
 
+        $idUser = $request->get('idUser');
+        $nom = Modell::getNomById($idUser)->nom;
+        $prenom = Modell::getPreomById($idUser)->prenom;
+
+
         if ($request->get('codeB') == "") {
-            $idUser = $request->get('idUser');
-            $nom = $request->get('nom');
-            $prenom = $request->get('prenom');
             $dateDeb = $request->get('dateDeb');
             $objet = $request->get('objet');
+
+
         }else if ($request->get('codeB') != ""){
-            $idUser = $request->get('idUser');
-            $nom = $request->get('nom');
-            $prenom = $request->get('prenom');
             $dateDeb = $request->get('dateDeb');
-            $objet = $request->get('codeB');
+            $nomObjet = $request->get('codeB');
+            $objet = Modell::getUnObjet($nomObjet);
         }
 
 
         Modell::emprunt($idUser, $nom, $prenom, $dateDeb, $objet);
 
-        return redirect('/accueil')->with('demenv', 'Votre emprunt a été accordé');
+        return redirect('/accueil')->with('emprunt', 'Votre emprunt a été accordé');
+    }
+
+
+    public  function getName(Request $request){
+
+        $name = $request->get('name');
+
+        $allNames = Modell::getNames($name);
+        $html = '';
+        if(count($allNames) > 0){
+            $html = $allNames[0]->nom . ' ' . $allNames[0]->prenom;
+        }
+
+        return $html;
+
+
+
     }
 }

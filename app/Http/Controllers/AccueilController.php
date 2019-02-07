@@ -19,7 +19,12 @@ class AccueilController extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public function renderAccueil(Request $request){
-        return view('accueil');
+        $demandes = Modell::getEmpruntAll();
+        return view('accueil')->with('demandes',$demandes);
+    }
+
+    public function renderAccueilBis(Request $request){
+        return redirect('/accueil')->with('emprunt', 'Votre emprunt a été accordé');
     }
 
 }
