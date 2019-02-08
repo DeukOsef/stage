@@ -47,26 +47,94 @@ class EmprunterController extends BaseController
 
     public function emprunt(Request $request){
 
-        $idUser = $request->get('idUser');
+        $idUser = Modell::getIdUserByConcat($request->get('idUser'))->idUser;
+
         $nom = Modell::getNomById($idUser)->nom;
         $prenom = Modell::getPreomById($idUser)->prenom;
+        $dateDeb = $request->get('dateDeb');
+//        $secteur = Modell::getSecteurById($idUser)->secteur;
+        $codeB = $request->get('codeB');
+        $codeB1 = $request->get('codeB1');
+        $codeB2 = $request->get('codeB2');
+        $codeB3 = $request->get('codeB3');
+        $codeB4 = $request->get('codeB4');
+
+        if($codeB != "" || $codeB1 != "" || $codeB2 != "" || $codeB3 != "" || $codeB4 != "" ){
+
+            if ($codeB == ""){
+                $codeB ="";
+            }
+            if ($codeB1 == ""){
+                $codeB1 ="1";
+            }
+            if ($codeB2 == ""){
+                $codeB2 ="2";
+            }
+            if ($codeB3 == ""){
+                $codeB3 ="3";
+            }
+            if ($codeB4 == ""){
+                $codeB4 ="4";
+            }
+                                    //            CODEBARRE 1
+
+            if ($codeB != "" && $codeB != $codeB1 && $codeB != $codeB2 && $codeB != $codeB3 && $codeB != $codeB4 ){
+                $objet = Modell::getUnObjet($codeB)->idObjet;
+
+                Modell::emprunt($idUser, $nom, $prenom, $dateDeb, $objet);
+
+            }
+
+                                            //            CODEBARRE 2
+
+            if ($codeB1 != "1" && $codeB1 != $codeB2 && $codeB1 != $codeB3 && $codeB1 != $codeB4 && $codeB1 != $codeB ){
+
+                $objet1 = Modell::getUnObjet($codeB1)->idObjet;
 
 
-        if ($request->get('codeB') == "") {
-            $dateDeb = $request->get('dateDeb');
-            $objet = $request->get('objet');
+                Modell::emprunt($idUser, $nom, $prenom, $dateDeb, $objet1);
+
+            }
+
+                                            //            CODEBARRE 3
+
+            if ($codeB2 != "2" && $codeB2 != $codeB3 && $codeB2 != $codeB4 && $codeB2 != $codeB && $codeB2 != $codeB1  ){
+                $objet2 = Modell::getUnObjet($codeB2)->idObjet;
+
+                Modell::emprunt($idUser, $nom, $prenom, $dateDeb, $objet2);
+
+            }
+                                            //            CODEBARRE 4
+
+            if ($codeB3 != "3" && $codeB3 != $codeB4 && $codeB3 != $codeB && $codeB3 != $codeB1 && $codeB3 != $codeB2 ){
+                $objet3 = Modell::getUnObjet($codeB3)->idObjet;
+
+                Modell::emprunt($idUser, $nom, $prenom, $dateDeb, $objet3);
 
 
-        }else if ($request->get('codeB') != ""){
-            $dateDeb = $request->get('dateDeb');
-            $nomObjet = $request->get('codeB');
-            $objet = Modell::getUnObjet($nomObjet);
+            }
+                                            //            CODE BARRE 5
+
+            if ($codeB4 != "4" && $codeB4 != $codeB && $codeB4 != $codeB1 && $codeB4 != $codeB2 && $codeB4 != $codeB3 ){
+                $objet4 = Modell::getUnObjet($codeB4)->idObjet;
+                Modell::emprunt($idUser, $nom, $prenom, $dateDeb, $objet4);
+
+            }
+
+            return redirect('/accueil')->with('emprunt', 'EMPRUNTE');
+
+
+        }elseif ($codeB == "" && $codeB1 == "" && $codeB2 == "" && $codeB3 == "" && $codeB4 == ""){
+            $objetl = $request->get('objet');
+            Modell::emprunt($idUser, $nom, $prenom, $dateDeb, $objetl);
+        }else{
+            return redirect('/emprunter')->with('demenv', 'ERREUR test4');
         }
 
 
-        Modell::emprunt($idUser, $nom, $prenom, $dateDeb, $objet);
 
-        return redirect('/accueil')->with('emprunt', 'Votre emprunt a été accordé');
+
+
     }
 
 

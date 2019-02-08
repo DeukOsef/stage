@@ -32,6 +32,10 @@
                                     </select>
                                 </div>
                             </div>
+                            <input type="hidden" id="vga" value="">
+                            <input type="hidden" id="hdmi" value="">
+                            <input type="hidden" id="usb" value="">
+                            <input type="hidden" id="ethernet" value="">
                                 {{-----------------------------------------------------------------------------------------------------------------------}}
                                 {{--UNITE CENTRAL--}}
                                 {{-----------------------------------------------------------------------------------------------------------------------}}
@@ -120,90 +124,13 @@
                                 <div class="form-group row">
                                     <label for="conn_uc" class="col-md-4 col-form-label text-md-right">Connectique </label>
                                     <div class="col-md-6" style="margin: auto;">
-                                    <input type="hidden" id="vga" value="">
-                                    <input type="hidden" id="hdmi" value="">
-                                    <input type="hidden" id="usb" value="">
-                                    <input type="hidden" id="ethernet" value="">
-                                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modalConnectique_uc">Ajouter</button>
+                                        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modalConnectique">Ajouter</button>
+
                                     {{--<div class="col-md-6">--}}
                                     {{--<input id="cgConn_uc" type="text" class="form-control" name="cgConn_uc" >--}}
                                     {{--</div>--}}
                                     </div>
                                 </div>
-
-                                <div class="modal fade" id="modalConnectique_uc">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h2 class="modal-title">Choisir</h2>
-                                                <button type="button" class="close" data-dismiss="modal">
-                                                    <span>&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                @csrf
-                                                <div class="row">
-                                                    <div class="col-md-5">
-                                                        <label for="vgam" class="col-md-8 col-form-label text-md-right">VGA</label>
-                                                        <select name="vgam" id="vgam" class="form-control" >
-                                                            @for($i = 0 ; $i < 6 ; $i++)
-                                                                <option value="{{$i}}">{{$i}}</option>
-                                                            @endfor
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-md-5 ">
-                                                        <label for="hdmim" class="col-md-8 col-form-label text-md-right">HDMI</label>
-                                                        <select name="hdmim" id="hdmim" class="form-control" >
-                                                            @for($i = 0 ; $i < 6 ; $i++)
-                                                                <option value="{{$i}}">{{$i}}</option>
-                                                            @endfor
-                                                        </select>
-                                                    </div>
-
-                                                    <div class="col-md-5">
-                                                        <label for="usbm" class="col-md-8 col-form-label text-md-right">USB</label>
-                                                        <select name="usbm" id="usbm" class="form-control" >
-                                                            @for($i = 0 ; $i < 6 ; $i++)
-                                                                <option value="{{$i}}">{{$i}}</option>
-                                                            @endfor
-
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-md-5 ">
-                                                        <label for="ethernetm" class="col-md-8 col-form-label text-md-right">Ethernet</label>
-                                                        <select name="ethernetm" id="ethernetm" class="form-control" >
-                                                            @for($i = 0 ; $i < 6 ; $i++)
-                                                                <option value="{{$i}}">{{$i}}</option>
-                                                            @endfor
-                                                        </select>
-                                                    </div>
-                                                    <br>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <button type="button" id="selecConnectuc">
-                                                            Confirmer
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                    <script>
-                                        $(document).ready(function() {
-                                            $("#selecConnectuc").on('click', function(e){
-                                                e.preventDefault();
-                                                $("#vga").val($("#vgam").val());
-                                                $("#hdmi").val($("#hdmim").val());
-                                                $("#usb").val($("#usbm").val());
-                                                $("#ethernet").val($("#ethernetm").val());
-                                                $('#modalConnectique_uc').modal('hide');
-                                            });
-                                        });
-                                    </script>
                             </div>
 
                                 {{-----------------------------------------------------------------------------------------------------------------------}}
@@ -223,14 +150,14 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="marque_imp" class="col-md-4 col-form-label text-md-right">Marque </label>
+                                        <label for="couleur_imp" class="col-md-4 col-form-label text-md-right">Couleur </label>
                                         <div class="col-md-6">
-                                            <input id="couleur_imp" type="text" class="form-control" name="couleur_imp" >
+                                            <input id="couleur_imp" type="checkbox" class="form-control" name="couleur_imp" value="1">
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
-                                        <label for="laser_imp" class="col-md-4 col-form-label text-md-right">laser</label>
+                                        <label for="laser_imp" class="col-md-4 col-form-label text-md-right">Type d'impression</label>
                                         <div class="col-md-6">
                                             <select name="laser_imp" id="laser_imp" class="form-control" >
                                                 <option >--Selectionnez un type d'impression--</option>
@@ -244,90 +171,12 @@
                                     <div class="form-group row">
                                         <label for="Conn_imp" class="col-md-4 col-form-label text-md-right">Connectiques </label>
                                         <div class="col-md-6" style="margin: auto;">
-                                        <input type="hidden" id="vga" value="">
-                                        <input type="hidden" id="hdmi" value="">
-                                        <input type="hidden" id="usb" value="">
-                                        <input type="hidden" id="ethernet" value="">
-                                        <button type="button" class="btn btn-info btn-lg " style="margin: auto;" data-toggle="modal" data-target="#modalConnectique_imp">Ajouter</button>
-                                        {{--<div class="col-md-6">--}}
+                                            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modalConnectique">Ajouter</button>
+                                            {{--<div class="col-md-6">--}}
                                         {{--<input id="cgConn_uc" type="text" class="form-control" name="cgConn_uc" >--}}
                                         {{--</div>--}}
-                                    </div>
-                                    </div>
-
-                                    <div class="modal fade" id="modalConnectique_imp">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h2 class="modal-title">Choisir</h2>
-                                                    <button type="button" class="close" data-dismiss="modal">
-                                                        <span>&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    @csrf
-                                                    <div class="row">
-                                                        <div class="col-md-5">
-                                                            <label for="vgam" class="col-md-8 col-form-label text-md-right">VGA</label>
-                                                            <select name="vgam" id="vgam" class="form-control" >
-                                                                @for($i = 0 ; $i < 6 ; $i++)
-                                                                    <option value="{{$i}}">{{$i}}</option>
-                                                                @endfor
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-md-5 ">
-                                                            <label for="hdmim" class="col-md-8 col-form-label text-md-right">HDMI</label>
-                                                            <select name="hdmim" id="hdmim" class="form-control" >
-                                                                @for($i = 0 ; $i < 6 ; $i++)
-                                                                    <option value="{{$i}}">{{$i}}</option>
-                                                                @endfor
-                                                            </select>
-                                                        </div>
-
-                                                        <div class="col-md-5">
-                                                            <label for="usbm" class="col-md-8 col-form-label text-md-right">USB</label>
-                                                            <select name="usbm" id="usbm" class="form-control" >
-                                                                @for($i = 0 ; $i < 6 ; $i++)
-                                                                    <option value="{{$i}}">{{$i}}</option>
-                                                                @endfor
-
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-md-5 ">
-                                                            <label for="ethernetm" class="col-md-8 col-form-label text-md-right">Ethernet</label>
-                                                            <select name="ethernetm" id="ethernetm" class="form-control" >
-                                                                @for($i = 0 ; $i < 6 ; $i++)
-                                                                    <option value="{{$i}}">{{$i}}</option>
-                                                                @endfor
-                                                            </select>
-                                                        </div>
-                                                        <br>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <button type="button" id="selecConnectimp">
-                                                                Confirmer
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
-
-
-                                    <script>
-                                        $(document).ready(function() {
-                                            $("#selecConnectimp").on('click', function(e){
-                                                e.preventDefault();
-                                                $("#vga").val($("#vgam").val());
-                                                $("#hdmi").val($("#hdmim").val());
-                                                $("#usb").val($("#usbm").val());
-                                                $("#ethernet").val($("#ethernetm").val());
-                                                $('#modalConnectique_telp').modal('hide');
-                                            });
-                                        });
-                                    </script>
                                 </div>
 
                                 {{-----------------------------------------------------------------------------------------------------------------------}}
@@ -507,91 +356,12 @@
                                     <div class="form-group row">
                                         <label for="Conn_telp" class="col-md-4 col-form-label text-md-right">Connectiques </label>
                                         <div class="col-md-6" style="margin: auto;">
-                                        <input type="hidden" id="vga" value="">
-                                        <input type="hidden" id="hdmi" value="">
-                                        <input type="hidden" id="usb" value="">
-                                        <input type="hidden" id="ethernet" value="">
-                                        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modalConnectique_telp">Ajouter</button>
+                                            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modalConnectique">Ajouter</button>
                                         {{--<div class="col-md-6">--}}
                                         {{--<input id="cgConn_uc" type="text" class="form-control" name="cgConn_uc" >--}}
                                         {{--</div>--}}
                                         </div>
                                     </div>
-
-                                    <div class="modal fade" id="modalConnectique_telp">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h2 class="modal-title">Choisir</h2>
-                                                    <button type="button" class="close" data-dismiss="modal">
-                                                        <span>&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    @csrf
-                                                    <div class="row">
-                                                        <div class="col-md-5">
-                                                            <label for="vgam" class="col-md-8 col-form-label text-md-right">VGA</label>
-                                                            <select name="vgam" id="vgam" class="form-control" >
-                                                                @for($i = 0 ; $i < 6 ; $i++)
-                                                                    <option value="{{$i}}">{{$i}}</option>
-                                                                @endfor
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-md-5 ">
-                                                            <label for="hdmim" class="col-md-8 col-form-label text-md-right">HDMI</label>
-                                                            <select name="hdmim" id="hdmim" class="form-control" >
-                                                                @for($i = 0 ; $i < 6 ; $i++)
-                                                                    <option value="{{$i}}">{{$i}}</option>
-                                                                @endfor
-                                                            </select>
-                                                        </div>
-
-                                                        <div class="col-md-5">
-                                                            <label for="usbm" class="col-md-8 col-form-label text-md-right">USB</label>
-                                                            <select name="usbm" id="usbm" class="form-control" >
-                                                                @for($i = 0 ; $i < 6 ; $i++)
-                                                                    <option value="{{$i}}">{{$i}}</option>
-                                                                @endfor
-
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-md-5 ">
-                                                            <label for="ethernetm" class="col-md-8 col-form-label text-md-right">Ethernet</label>
-                                                            <select name="ethernetm" id="ethernetm" class="form-control" >
-                                                                @for($i = 0 ; $i < 6 ; $i++)
-                                                                    <option value="{{$i}}">{{$i}}</option>
-                                                                @endfor
-                                                            </select>
-                                                        </div>
-                                                        <br>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <button type="button" id="selecConnecttbt">
-                                                                Confirmer
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <script>
-                                        $(document).ready(function() {
-                                            $("#selecConnecttbt").on('click', function(e){
-                                                e.preventDefault();
-                                                $("#vga").val($("#vgam").val());
-                                                $("#hdmi").val($("#hdmim").val());
-                                                $("#usb").val($("#usbm").val());
-                                                $("#ethernet").val($("#ethernetm").val());
-                                                $('#modalConnectique_telp').modal('hide');
-                                            });
-                                        });
-                                    </script>
-
                                 </div>
 
                                 {{-----------------------------------------------------------------------------------------------------------------------}}
@@ -630,90 +400,13 @@
                                     <div class="form-group row">
                                         <label for="Conn_telp" class="col-md-4 col-form-label text-md-right">Connectiques </label>
                                         <div class="col-md-6" style="margin: auto;">
-                                        <input type="hidden" id="vga" value="">
-                                        <input type="hidden" id="hdmi" value="">
-                                        <input type="hidden" id="usb" value="">
-                                        <input type="hidden" id="ethernet" value="">
-                                        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modalConnectique_ecr">Ajouter</button>
+                                            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modalConnectique">Ajouter</button>
                                         {{--<div class="col-md-6">--}}
                                         {{--<input id="cgConn_uc" type="text" class="form-control" name="cgConn_uc" >--}}
                                         {{--</div>--}}
                                         </div>
                                     </div>
 
-                                    <div class="modal fade" id="modalConnectique_ecr">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h2 class="modal-title">Choisir</h2>
-                                                    <button type="button" class="close" data-dismiss="modal">
-                                                        <span>&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    @csrf
-                                                    <div class="row">
-                                                        <div class="col-md-5">
-                                                            <label for="vgam" class="col-md-8 col-form-label text-md-right">VGA</label>
-                                                            <select name="vgam" id="vgam" class="form-control" >
-                                                                @for($i = 0 ; $i < 6 ; $i++)
-                                                                    <option value="{{$i}}">{{$i}}</option>
-                                                                @endfor
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-md-5 ">
-                                                            <label for="hdmim" class="col-md-8 col-form-label text-md-right">HDMI</label>
-                                                            <select name="hdmim" id="hdmim" class="form-control" >
-                                                                @for($i = 0 ; $i < 6 ; $i++)
-                                                                    <option value="{{$i}}">{{$i}}</option>
-                                                                @endfor
-                                                            </select>
-                                                        </div>
-
-                                                        <div class="col-md-5">
-                                                            <label for="usbm" class="col-md-8 col-form-label text-md-right">USB</label>
-                                                            <select name="usbm" id="usbm" class="form-control" >
-                                                                @for($i = 0 ; $i < 6 ; $i++)
-                                                                    <option value="{{$i}}">{{$i}}</option>
-                                                                @endfor
-
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-md-5 ">
-                                                            <label for="ethernetm" class="col-md-8 col-form-label text-md-right">Ethernet</label>
-                                                            <select name="ethernetm" id="ethernetm" class="form-control" >
-                                                                @for($i = 0 ; $i < 6 ; $i++)
-                                                                    <option value="{{$i}}">{{$i}}</option>
-                                                                @endfor
-                                                            </select>
-                                                        </div>
-                                                        <br>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <button type="button" id="selecConnectecr">
-                                                                Confirmer
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <script>
-                                        $(document).ready(function() {
-                                            $("#selecConnectecr").on('click', function(e){
-                                                e.preventDefault();
-                                                $("#vga").val($("#vgam").val());
-                                                $("#hdmi").val($("#hdmim").val());
-                                                $("#usb").val($("#usbm").val());
-                                                $("#ethernet").val($("#ethernetm").val());
-                                                $('#modalConnectique_ecr').modal('hide');
-                                            });
-                                        });
-                                    </script>
                                 </div>
 
                                 {{-----------------------------------------------------------------------------------------------------------------------}}
@@ -745,90 +438,12 @@
                                     <div class="form-group row">
                                         <label for="Conn_cla" class="col-md-4 col-form-label text-md-right">Connectiques </label>
                                         <div class="col-md-6" style="margin: auto;">
-                                            <input type="hidden" id="vga" value="">
-                                            <input type="hidden" id="hdmi" value="">
-                                            <input type="hidden" id="usb" value="">
-                                            <input type="hidden" id="ethernet" value="">
-                                            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modalConnectique_cla">Ajouter</button>
+                                            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modalConnectique">Ajouter</button>
                                             {{--<div class="col-md-6">--}}
                                             {{--<input id="cgConn_uc" type="text" class="form-control" name="cgConn_uc" >--}}
                                             {{--</div>--}}
                                         </div>
                                     </div>
-
-                                    <div class="modal fade" id="modalConnectique_cla">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h2 class="modal-title">Choisir</h2>
-                                                    <button type="button" class="close" data-dismiss="modal">
-                                                        <span>&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    @csrf
-                                                    <div class="row">
-                                                        <div class="col-md-5">
-                                                            <label for="vgam" class="col-md-8 col-form-label text-md-right">VGA</label>
-                                                            <select name="vgam" id="vgam" class="form-control" >
-                                                                @for($i = 0 ; $i < 6 ; $i++)
-                                                                    <option value="{{$i}}">{{$i}}</option>
-                                                                @endfor
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-md-5 ">
-                                                            <label for="hdmim" class="col-md-8 col-form-label text-md-right">HDMI</label>
-                                                            <select name="hdmim" id="hdmim" class="form-control" >
-                                                                @for($i = 0 ; $i < 6 ; $i++)
-                                                                    <option value="{{$i}}">{{$i}}</option>
-                                                                @endfor
-                                                            </select>
-                                                        </div>
-
-                                                        <div class="col-md-5">
-                                                            <label for="usbm" class="col-md-8 col-form-label text-md-right">USB</label>
-                                                            <select name="usbm" id="usbm" class="form-control" >
-                                                                @for($i = 0 ; $i < 6 ; $i++)
-                                                                    <option value="{{$i}}">{{$i}}</option>
-                                                                @endfor
-
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-md-5 ">
-                                                            <label for="ethernetm" class="col-md-8 col-form-label text-md-right">Ethernet</label>
-                                                            <select name="ethernetm" id="ethernetm" class="form-control" >
-                                                                @for($i = 0 ; $i < 6 ; $i++)
-                                                                    <option value="{{$i}}">{{$i}}</option>
-                                                                @endfor
-                                                            </select>
-                                                        </div>
-                                                        <br>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <button type="button" id="selecConnectcla">
-                                                                Confirmer
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <script>
-                                        $(document).ready(function() {
-                                            $("#selecConnectcla").on('click', function(e){
-                                                e.preventDefault();
-                                                $("#vga").val($("#vgam").val());
-                                                $("#hdmi").val($("#hdmim").val());
-                                                $("#usb").val($("#usbm").val());
-                                                $("#ethernet").val($("#ethernetm").val());
-                                                $('#modalConnectique_cla').modal('hide');
-                                            });
-                                        });
-                                    </script>
                                 </div>
 
                                 {{-----------------------------------------------------------------------------------------------------------------------}}
@@ -921,91 +536,12 @@
                                     <div class="form-group row">
                                         <label for="Conn_pcp" class="col-md-4 col-form-label text-md-right">Connectiques </label>
                                         <div class="col-md-6" style="margin: auto;">
-                                            <input type="hidden" id="vga" value="">
-                                            <input type="hidden" id="hdmi" value="">
-                                            <input type="hidden" id="usb" value="">
-                                            <input type="hidden" id="ethernet" value="">
-                                            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modalConnectique_pcp">Ajouter</button>
+                                            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modalConnectique">Ajouter</button>
                                             {{--<div class="col-md-6">--}}
                                             {{--<input id="cgConn_uc" type="text" class="form-control" name="cgConn_uc" >--}}
                                             {{--</div>--}}
                                         </div>
                                     </div>
-
-                                    <div class="modal fade" id="modalConnectique_pcp">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h2 class="modal-title">Choisir</h2>
-                                                    <button type="button" class="close" data-dismiss="modal">
-                                                        <span>&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    @csrf
-                                                    <div class="row">
-                                                        <div class="col-md-5">
-                                                            <label for="vgam" class="col-md-8 col-form-label text-md-right">VGA</label>
-                                                            <select name="vgam" id="vgam" class="form-control" >
-                                                                @for($i = 0 ; $i < 6 ; $i++)
-                                                                    <option value="{{$i}}">{{$i}}</option>
-                                                                @endfor
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-md-5 ">
-                                                            <label for="hdmim" class="col-md-8 col-form-label text-md-right">HDMI</label>
-                                                            <select name="hdmim" id="hdmim" class="form-control" >
-                                                                @for($i = 0 ; $i < 6 ; $i++)
-                                                                    <option value="{{$i}}">{{$i}}</option>
-                                                                @endfor
-                                                            </select>
-                                                        </div>
-
-                                                        <div class="col-md-5">
-                                                            <label for="usbm" class="col-md-8 col-form-label text-md-right">USB</label>
-                                                            <select name="usbm" id="usbm" class="form-control" >
-                                                                @for($i = 0 ; $i < 6 ; $i++)
-                                                                    <option value="{{$i}}">{{$i}}</option>
-                                                                @endfor
-
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-md-5 ">
-                                                            <label for="ethernetm" class="col-md-8 col-form-label text-md-right">Ethernet</label>
-                                                            <select name="ethernetm" id="ethernetm" class="form-control" >
-                                                                @for($i = 0 ; $i < 6 ; $i++)
-                                                                    <option value="{{$i}}">{{$i}}</option>
-                                                                @endfor
-                                                            </select>
-                                                        </div>
-                                                        <br>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <button type="button" id="selecConnectpcp">
-                                                                Confirmer
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <script>
-                                        $(document).ready(function() {
-                                            $("#selecConnectpcp").on('click', function(e){
-                                                e.preventDefault();
-                                                $("#vga").val($("#vgam").val());
-                                                $("#hdmi").val($("#hdmim").val());
-                                                $("#usb").val($("#usbm").val());
-                                                $("#ethernet").val($("#ethernetm").val());
-                                                $('#modalConnectique_pcp').modal('hide');
-                                            });
-                                        });
-                                    </script>
-
                                     <div class="form-group row">
                                         <label for="resolution_pcp" class="col-md-4 col-form-label text-md-right">Résolution</label>
                                         <div class="col-md-6">
@@ -1146,90 +682,13 @@
                                     <div class="form-group row">
                                         <label for="Conn_vidp" class="col-md-4 col-form-label text-md-right">Connectiques </label>
                                         <div class="col-md-6" style="margin: auto;">
-                                            <input type="hidden" id="vga" value="">
-                                            <input type="hidden" id="hdmi" value="">
-                                            <input type="hidden" id="usb" value="">
-                                            <input type="hidden" id="ethernet" value="">
-                                            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modalConnectique_vidp">Ajouter</button>
+                                            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modalConnectique">Ajouter</button>
                                             {{--<div class="col-md-6">--}}
                                             {{--<input id="cgConn_uc" type="text" class="form-control" name="cgConn_uc" >--}}
                                             {{--</div>--}}
                                         </div>
                                     </div>
 
-                                    <div class="modal fade" id="modalConnectique_vidp">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h2 class="modal-title">Choisir</h2>
-                                                    <button type="button" class="close" data-dismiss="modal">
-                                                        <span>&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    @csrf
-                                                    <div class="row">
-                                                        <div class="col-md-5">
-                                                            <label for="vgam" class="col-md-8 col-form-label text-md-right">VGA</label>
-                                                            <select name="vgam" id="vgam" class="form-control" >
-                                                                @for($i = 0 ; $i < 6 ; $i++)
-                                                                    <option value="{{$i}}">{{$i}}</option>
-                                                                @endfor
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-md-5 ">
-                                                            <label for="hdmim" class="col-md-8 col-form-label text-md-right">HDMI</label>
-                                                            <select name="hdmim" id="hdmim" class="form-control" >
-                                                                @for($i = 0 ; $i < 6 ; $i++)
-                                                                    <option value="{{$i}}">{{$i}}</option>
-                                                                @endfor
-                                                            </select>
-                                                        </div>
-
-                                                        <div class="col-md-5">
-                                                            <label for="usbm" class="col-md-8 col-form-label text-md-right">USB</label>
-                                                            <select name="usbm" id="usbm" class="form-control" >
-                                                                @for($i = 0 ; $i < 6 ; $i++)
-                                                                    <option value="{{$i}}">{{$i}}</option>
-                                                                @endfor
-
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-md-5 ">
-                                                            <label for="ethernetm" class="col-md-8 col-form-label text-md-right">Ethernet</label>
-                                                            <select name="ethernetm" id="ethernetm" class="form-control" >
-                                                                @for($i = 0 ; $i < 6 ; $i++)
-                                                                    <option value="{{$i}}">{{$i}}</option>
-                                                                @endfor
-                                                            </select>
-                                                        </div>
-                                                        <br>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <button type="button" id="selecConnectvidp">
-                                                                Confirmer
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <script>
-                                        $(document).ready(function() {
-                                            $("#selecConnectvidp").on('click', function(e){
-                                                e.preventDefault();
-                                                $("#vga").val($("#vgam").val());
-                                                $("#hdmi").val($("#hdmim").val());
-                                                $("#usb").val($("#usbm").val());
-                                                $("#ethernet").val($("#ethernetm").val());
-                                                $('#modalConnectique_vidp').modal('hide');
-                                            });
-                                        });
-                                    </script>
 
                                     <div class="form-group row">
                                         <label for="resolution_vidp" class="col-md-4 col-form-label text-md-right">Résolution</label>
@@ -1281,9 +740,6 @@
 
                                 </div>
 
-
-
-
                                 <div class="form-group row">
                                     <label for="cpu_uc" class="col-md-4 col-form-label text-md-right">Armoire </label>
                                     <div class="col-md-6">
@@ -1303,7 +759,7 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="site" class="col-md-4 col-form-label text-md-right">Site</label>
+                                    <label for="site" class="col-md-4 col-form-label text-md-right">Localisation</label>
                                     <div class="col-md-6">
                                         <select name="site" id="site" class="form-control" required>
                                             <option >--Selectionnez un site--</option>
@@ -1318,7 +774,7 @@
                                     <label for="secteur" class="col-md-4 col-form-label text-md-right">Secteur</label>
                                     <div class="col-md-6">
                                         <select name="secteur" id="secteur" class="form-control" required>
-                                            <option >--Selectionnez un secteur--</option>
+
                                             @foreach($secteurs as $secteur)
                                                 <option value="{{ $secteur->idSecteur }}">{{ $secteur->nomSecteur}}</option>
                                             @endforeach
@@ -1359,6 +815,65 @@
                         </form>
                     </div>
                     <a href="{{url('/accueil')}}" class="btn btn-xs btn-primary" > Retour a l'accueil</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalConnectique">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">Choisir</h2>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @csrf
+                    <div class="row">
+                        <div class="col-md-5">
+                            <label for="vgam" class="col-md-8 col-form-label text-md-right">VGA</label>
+                            <select name="vgam" id="vgam" class="form-control" >
+                                @for($i = 0 ; $i < 6 ; $i++)
+                                    <option value="{{$i}}">{{$i}}</option>
+                                @endfor
+                            </select>
+                        </div>
+                        <div class="col-md-5 ">
+                            <label for="hdmim" class="col-md-8 col-form-label text-md-right">HDMI</label>
+                            <select name="hdmim" id="hdmim" class="form-control" >
+                                @for($i = 0 ; $i < 6 ; $i++)
+                                    <option value="{{$i}}">{{$i}}</option>
+                                @endfor
+                            </select>
+                        </div>
+
+                        <div class="col-md-5">
+                            <label for="usbm" class="col-md-8 col-form-label text-md-right">USB</label>
+                            <select name="usbm" id="usbm" class="form-control" >
+                                @for($i = 0 ; $i < 6 ; $i++)
+                                    <option value="{{$i}}">{{$i}}</option>
+                                @endfor
+
+                            </select>
+                        </div>
+                        <div class="col-md-5 ">
+                            <label for="ethernetm" class="col-md-8 col-form-label text-md-right">Ethernet</label>
+                            <select name="ethernetm" id="ethernetm" class="form-control" >
+                                @for($i = 0 ; $i < 6 ; $i++)
+                                    <option value="{{$i}}">{{$i}}</option>
+                                @endfor
+                            </select>
+                        </div>
+                        <br>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button type="button" id="selecConnect">
+                                Confirmer
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1424,6 +939,18 @@
 
                 }
 
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $("#selecConnect").on('click', function(e){
+                e.preventDefault();
+                $("#vga").val($("#vgam").val());
+                $("#hdmi").val($("#hdmim").val());
+                $("#usb").val($("#usbm").val());
+                $("#ethernet").val($("#ethernetm").val());
+                $('#modalConnectique').modal('hide');
             });
         });
     </script>

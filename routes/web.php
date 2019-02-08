@@ -26,6 +26,7 @@ Route::any('/getEmprunt', 'MesEmpruntsController@getEmprunt')->name('getEmprunt'
 Route::any('/emprunter','EmprunterController@renderEmprunter'); //chargement de la page emprunter
 Route::any('/loadObjet','EmprunterController@loadObjet'); //chargement des objets en fonction des types
 Route::any('/emprunt','EmprunterController@emprunt'); //mise en base de l'emprunt
+Route::any('/utilisateur','UtilisateurController@renderUtilisateur'); //mise en base de l'emprunt
 
 
 Route::any('/listeObjets','ListeObjetsController@renderListeObjets');
@@ -33,6 +34,7 @@ Route::any('/checkManque','ListeObjetsController@checkManque');
 Route::any('/info','ListeObjetsController@info');
 Route::any('/infoWithCodeB','ListeObjetsController@infoWithCodeB');
 Route::any('/getEmpruntAll', 'ListeObjetsController@getEmpruntAll')->name('getEmpruntAll');
+Route::any('/getAllUsers', 'UtilisateurController@getAllUsers')->name('getAllUsers');
 Route::any('/rendreEmprunt/{id}','MesEmpruntsController@rendreEmprunt');
 
 Route::any('/CreationObjet','CreationObjetController@renderCreationObjet');
@@ -44,6 +46,17 @@ Route::any('/getName','EmprunterController@getName');
 Route::any('/barcode','CodeBarreController@barcode');
 Route::any('/rimprimer/{idObjet}','ListeObjetsController@rimprimer');
 Route::any('/supprimer/{id}','ListeObjetsController@supprimer');
+
+
+
+Route::any('/supprimerUser/{id}','UtilisateurController@supprimerUser');
+Route::any('/editUser/{id}','EditUserController@renderEditUser');
+Route::any('/update','EditUserController@editUser');
+Route::any('/creerUser','CreerController@renderCreerUtilisateur');
+Route::any('/create','CreerController@createUser');
+
+
+Route::any('/emprunter/{id}','ListeObjetsController@emprunter');
 
 
 Route::any('/parametre', 'ParametreController@renderParametre');

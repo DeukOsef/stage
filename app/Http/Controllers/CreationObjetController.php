@@ -45,9 +45,10 @@ class CreationObjetController extends BaseController
 
 
         if ($request->type == 1) {
+            $dataNom = array();
             for ($i = 0; $i < $numb; $i++) {
                 $dataInsertDemandeCp = array();
-                $dataNom = array();
+
                 $dataInsertDemandeCp['fournisseur'] = $request->get('fournisseur');
                 $dataInsertDemandeCp['secteur'] = $request->get('secteur');
                 $dataInsertDemandeCp['nomObjet'] = Modell::getNomType(1)->nomType . "-" . Modell::getNombreType(1)->numero;
@@ -56,10 +57,10 @@ class CreationObjetController extends BaseController
                 $dataInsertDemandeCp['marque'] = $request->get('marque_uc');
 
 
-                $dataInsertDemandeCp['vga'] = $request->get('vga_uc');
-                $dataInsertDemandeCp['usb'] = $request->get('usb');
-                $dataInsertDemandeCp['ethernet'] = $request->get('ethernet');
-                $dataInsertDemandeCp['hdmi'] = $request->get('hdmi');
+                $dataInsertDemandeCp['vga'] = $request->get('vgam');
+                $dataInsertDemandeCp['usb'] = $request->get('usbm');
+                $dataInsertDemandeCp['ethernet'] = $request->get('ethernetm');
+                $dataInsertDemandeCp['hdmi'] = $request->get('hdmim');
 
 
                 $dataInsertDemandeCp['ram'] = $request->get('ram_uc');
@@ -85,10 +86,10 @@ class CreationObjetController extends BaseController
 
 
 
-
+                $dataNom[] = $dataInsertDemandeCp['nomObjet'];
                 Modell::creer($dataInsertDemandeCp);
                 Modell::updateNumero(1);
-                $dataNom[] = $dataInsertDemandeCp['nomObjet'];
+
             }
             $pdf = PDF::loadView('codeBarre',compact('dataNom'));
             $name = "etiquette" . date("Y-m-d-H-i") . ".pdf";
@@ -121,7 +122,11 @@ class CreationObjetController extends BaseController
                 $dataInsertDemandeCp['usb'] = $request->get('usb');
                 $dataInsertDemandeCp['ethernet'] = $request->get('usb');
                 $dataInsertDemandeCp['hdmi'] = $request->get('hdmi');
-                $dataInsertDemandeCp['couleur'] = $request->get('couleur_imp');
+                if ($request->get('couleur_imp')==0) {
+                    $dataInsertDemandeCp['couleur'] = "non";
+                }else{
+                    $dataInsertDemandeCp['couleur'] = "oui";
+                }
                 $dataInsertDemandeCp['laser'] = $request->get('laser_imp');
                 $dataInsertDemandeCp['connectique'] = $request->get('conn_imp');
                 $dataInsertDemandeCp['site'] = $request->get('site');
@@ -139,6 +144,7 @@ class CreationObjetController extends BaseController
                 Modell::updateNumero(2);
                 $dataNom[] = $dataInsertDemandeCp['nomObjet'];
             }
+            var_dump($dataNom);die;
             $pdf = PDF::loadView('codeBarre',compact('dataNom'));
             $name = "etiquette" . date("Y-m-d-H-i") . ".pdf";
 
@@ -172,10 +178,13 @@ class CreationObjetController extends BaseController
                 $dataInsertDemandeCp['resolution'] = $request->get('resolution_telp');
                 $dataInsertDemandeCp['ap'] = $request->get('Ap_telp');
                 $dataInsertDemandeCp['typeChargeur'] = $request->get('typeChargeur_telp');
-                $nomObjet = Modell::getNomType(1)->nomType . "-" . Modell::getNombreType(1)->numero;
-                $pdf = $request->file('facture');
-                $pdfname = 'facture-'.$nomObjet.'.pdf';
-                $pdf->move('storage/facture',$pdfname);
+                if ($request->file('facture') != null) {
+                    $nomObjet = Modell::getNomType(1)->nomType . "-" . Modell::getNombreType(1)->numero;
+                    $pdf = $request->file('facture');
+                    $pdfname = 'facture-' . $nomObjet . '.pdf';
+                    $pdf->move('storage/facture', $pdfname);
+                }
+
                 if ($request->get('sim_telp')==0) {
                     $dataInsertDemandeCp['doubleSim'] = "non";
                 }else{

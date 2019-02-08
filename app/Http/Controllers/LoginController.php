@@ -19,6 +19,7 @@ class LoginController extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public function renderLogin(Request $request){
+//        Modell::updatepass('pwagon');
         return view('login');
     }
 
@@ -34,7 +35,7 @@ class LoginController extends BaseController
             Session::put('client',Modell::getName($login));
             return redirect('/accueil');
         }else{
-            return redirect('/')->with('errPwd','Login ou mot de passe eronné');
+            return redirect('/')->with('errPwd','Login ou mot de passe erroné');
         }
 
     }

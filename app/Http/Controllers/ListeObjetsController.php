@@ -42,7 +42,7 @@ class ListeObjetsController extends BaseController
                     return '<a href="'.url('rimprimer').'/'.$demandes->idObjet.'" class="btn btn-xs btn-primary "> Imprimer</a>                           <button type="button" onclick="openModalSup('.$idObjet.',event)" id="test" data="'.$idObjet.'" class="btn btn-xs btn-primary " data-toggle="modal" data-target="#modalSup" style="margin-top: 4px"><i class="glyphicon glyphicon-edit"></i>Supprimer</button>                                      <button type="button" onclick="openModal('.$id.',event)" id="test" data="'.$id.'" class="btn btn-xs btn-primary " data-toggle="modal" data-target="#modalRendre" style="margin-top: 4px"><i class="glyphicon glyphicon-edit"></i>Rendre</button>';
                 }else{
                     $idObjet="$demandes->idObjet";
-                    return '<a href="'.url('rimprimer').'/'.$demandes->idObjet.'" class="btn btn-xs btn-primary "> Imprimer</a> <button type="button" onclick="openModalSup('.$idObjet.',event)" id="test" data="'.$idObjet.'" class="btn btn-xs btn-primary " data-toggle="modal" data-target="#modalSup" style="margin-top: 4px"><i class="glyphicon glyphicon-edit"></i>Supprimer</button>';
+                    return '<a href="'.url('rimprimer').'/'.$demandes->idObjet.'" class="btn btn-xs btn-primary "> Imprimer</a> <button type="button" onclick="openModalSup('.$idObjet.',event)" id="test" data="'.$idObjet.'" class="btn btn-xs btn-primary " data-toggle="modal" data-target="#modalSup" style="margin-top: 4px"><i class="glyphicon glyphicon-edit"></i>Supprimer</button>                           <button type="button" onclick="openModalSup('.$idObjet.',event)" id="test" data="'.$idObjet.'" class="btn btn-xs btn-primary " data-toggle="modal" data-target="#modalEmprunter" style="margin-top: 4px"><i class="glyphicon glyphicon-edit"></i>Emprunter</button>';
                 }
                     }
             )->addColumn('site', function ($demandes) {
@@ -51,6 +51,16 @@ class ListeObjetsController extends BaseController
                 return Modell::getNomSecteur($demandes->secteur)->nomSecteur;}
             )->editColumn('emprunterPar', function ($demandes){
                 return $demandes->emprunterPar;
+            })->editColumn('armoire', function ($demandes){
+                $tab = array();
+                $tab['emprunterPar'] = $demandes->emprunterPar;
+                $tab['armoire'] = $demandes->armoire;
+                return $tab;
+            })->editColumn('rayonnage', function ($demandes){
+                $tab = array();
+                $tab['emprunterPar'] = $demandes->emprunterPar;
+                $tab['rayonnage'] = $demandes->rayonnage;
+                return $tab;
             })
             ->make(true);
     }
@@ -61,7 +71,7 @@ class ListeObjetsController extends BaseController
 
         foreach ($checks as $check){
             if ($check->nb < $check->limite) {
-                   $htmll .= '<div><b>Il ne reste plus que ' . $check->nb . ' unité du type ' . $check->designation . '.</b></div>';
+                   $htmll .= '<div style="font-size: 20px ;"><b>&nbsp;&nbsp;Il ne reste plus que ' . $check->nb .' '. $check->designation . '(s) en stock.</b></div>';
             }
         }
         return $htmll;
@@ -78,130 +88,145 @@ class ListeObjetsController extends BaseController
         foreach ($infos as $info) {
 
             if ($info->nomObjet != null) {
-                $htmlll .= '<div>Nom Objet : ' . $info->nomObjet . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Nom Objet :</b> ' . $info->nomObjet . '</div>';
             }
             if ($info->ram != null) {
-                $htmlll .= '<div>Ram : ' . $info->ram . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Ram :</b> ' . $info->ram . '</div>';
             }
             if ($info->marque != null) {
-                $htmlll .= '<div>Marque : ' . $info->marque . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Marque : </b>' . $info->marque . '</div>';
             }
             if ($info->hddTaille != null) {
-                $htmlll .= '<div>Taille du disque dur : ' . $info->marque . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Taille du disque dur : </b>' . $info->marque . '</div>';
             }
             if ($info->hddVitesse != null) {
-                $htmlll .= '<div>Vitesse du disque dur : ' . $info->hddVitesse . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Vitesse du disque dur : </b>' . $info->hddVitesse . '</div>';
             }
             if ($info->doubleSim != null) {
-                $htmlll .= '<div>Double Sim : ' . $info->doubleSim . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Double Sim : </b>' . $info->doubleSim . '</div>';
             }
             if ($info->cpu != null) {
-                $htmlll .= '<div>Processeur : ' . $info->cpu . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Processeur :</b> ' . $info->cpu . '</div>';
             }
             if ($info->os != null) {
-                $htmlll .= '<div>OS : ' . $info->os . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>OS :</b> ' . $info->os . '</div>';
             }
             if ($info->couleur != null) {
-                $htmlll .= '<div>Couleur : ' . $info->couleur . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Couleur : </b>' . $info->couleur . '</div>';
             }
             if ($info->laser != null) {
-                $htmlll .= '<div>Laser : ' . $info->laser . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Laser :</b> ' . $info->laser . '</div>';
             }
             if ($info->resolution != null) {
-                $htmlll .= '<div>Résolution : ' . $info->resolution . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Résolution : </b>' . $info->resolution . '</div>';
             }
             if ($info->typeChargeur != null) {
-                $htmlll .= '<div>Type chargeur : ' . $info->typeChargeur . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Type chargeur :</b> ' . $info->typeChargeur . '</div>';
             }
             if ($info->tempReponse != null) {
-                $htmlll .= '<div>Temp de réponse : ' . $info->tempReponse . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Temp de réponse :</b> ' . $info->tempReponse . '</div>';
             }
             if ($info->mecanique != null) {
-                $htmlll .= '<div>Mécanique : ' . $info->mecanique . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Mécanique : </b>' . $info->mecanique . '</div>';
             }
             if ($info->tailleBatterie != null) {
-                $htmlll .= '<div>Puissance de la batterie : ' . $info->tailleBatterie . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Puissance de la batterie :</b> ' . $info->tailleBatterie . '</div>';
             }
             if ($info->nbPort != null) {
-                $htmlll .= '<div>Nombre de ports : ' . $info->nbPort . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Nombre de ports :</b> ' . $info->nbPort . '</div>';
             }
             if ($info->debit != null) {
-                $htmlll .= '<div>Débit : ' . $info->debit . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Débit :</b> ' . $info->debit . '</div>';
+            }
+            if ($info->armoire != null) {
+                $htmlll .= '<div style="font-size: 20px ;"><b>Armoire :</b> ' . $info->armoire . '</div>';
+            }
+            if ($info->rayonnage != null) {
+                $htmlll .= '<div style="font-size: 20px ;"><b>Rayonnage :</b> ' . $info->rayonnage . '</div>';
             }
             if ($info->mannageable != null) {
-                $htmlll .= '<div>Mannageable : ' . $info->mannageable . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Mannageable : </b>' . $info->mannageable . '</div>';
             }
             if ($info->categorie != null) {
-                $htmlll .= '<div>Catégorie : ' . $info->categorie . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Catégorie :</b> ' . $info->categorie . '</div>';
             }
             if ($info->nbPrise != null) {
-                $htmlll .= '<div>Nombre de prise : ' . $info->nbPrise . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Nombre de prise :</b> ' . $info->nbPrise . '</div>';
             }
             if ($info->parafoudre != null) {
-                $htmlll .= '<div>Parafoudre : ' . $info->parafoudre . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Parafoudre :</b> ' . $info->parafoudre . '</div>';
             }
             if ($info->interrupteur != null) {
-                $htmlll .= '<div>Interrupteur : ' . $info->interrupteur . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Interrupteur :</b> ' . $info->interrupteur . '</div>';
             }
             if ($info->son != null) {
-                $htmlll .= '<div>Son : ' . $info->son . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Son :</b> ' . $info->son . '</div>';
             }
             if ($info->titre != null) {
-                $htmlll .= '<div>Titre : ' . $info->titre . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Titre :</b> ' . $info->titre . '</div>';
             }
             if ($info->puissanceProcesseur != null) {
-                $htmlll .= '<div>Puissance du processeur : ' . $info->puissanceProcesseur . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Puissance du processeur :</b> ' . $info->puissanceProcesseur . '</div>';
             }
             if ($info->marqueProcesseur != null) {
-                $htmlll .= '<div>Marque du processeur : ' . $info->marqueProcesseur . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Marque du processeur :</b> ' . $info->marqueProcesseur . '</div>';
             }
             if ($info->nomProcesseur != null) {
-                $htmlll .= '<div>Nom du processeur : ' . $info->nomProcesseur . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Nom du processeur :</b> ' . $info->nomProcesseur . '</div>';
             }
             if ($info->apAv != null) {
-                $htmlll .= '<div>Appareil photo avant : ' . $info->apAv . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Appareil photo avant : </b>' . $info->apAv . '</div>';
             }
             if ($info->apAr != null) {
-                $htmlll .= '<div>Appareil photo arrière : ' . $info->apAr . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Appareil photo arrière :</b> ' . $info->apAr . '</div>';
             }
             if ($info->typeSim != null) {
-                $htmlll .= '<div>Type sim : ' . $info->typeSim . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Type sim :</b> ' . $info->typeSim . '</div>';
             }
             if ($info->longueur != null) {
-                $htmlll .= '<div>Longueur : ' . $info->longueur . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Longueur :</b> ' . $info->longueur . '</div>';
             }
             if ($info->telecommande != null) {
-                $htmlll .= '<div>Télécommande : ' . $info->telecommande . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Télécommande :</b> ' . $info->telecommande . '</div>';
             }
             if ($info->focal != null) {
-                $htmlll .= '<div>Focal court : ' . $info->focal . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Focal court :</b> ' . $info->focal . '</div>';
             }
             if ($info->descr != null) {
-                $htmlll .= '<div>Description : ' . $info->descr . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Description :</b> ' . $info->descr . '</div>';
             }
             if ($info->fournisseur != null) {
-                $htmlll .= '<div>Créateur : ' . $info->fournisseur . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Créateur :</b> ' . $info->fournisseur . '</div>';
             }
             if ($info->fonctionne != null) {
-                $htmlll .= '<div>Fonctionne : ' . $info->fonctionne . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Fonctionne :</b> ' . $info->fonctionne . '</div>';
             }
             if ($info->vga != null) {
-                $htmlll .= '<div>Vga: ' . $info->vga . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Vga</b>: ' . $info->vga . '</div>';
             }
             if ($info->usb != null) {
-                $htmlll .= '<div>Usb : ' . $info->usb . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Usb :</b>' . $info->usb . '</div>';
+            }
+            if ($info->site != null) {
+                $htmlll .= '<div style="font-size: 20px ;"><b>Site :</b> ' . $info->site. '</div>';
+            }
+            if ($info->secteur != null) {
+                $htmlll .= '<div style="font-size: 20px ;"><b>Secteur :</b> ' . $info->secteur. '</div>';
             }
             if ($info->ethernet != null) {
-                $htmlll .= '<div>Ethernet : ' . $info->ethernet . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Ethernet : </b>' . $info->ethernet . '</div>';
             }
             if ($info->hdmi != null) {
-                $htmlll .= '<div>Hdmi : ' . $info->hdmi . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Hdmi : </b>' . $info->hdmi . '</div>';
             }
+            $htmlll .= '<br>';
+            $htmlll .= '<h2 class="modal-title">Historique de l\'objet  </h2>';
             $htmlll .= '<br>';
         }
 
         foreach ($historiques as $historique){
-            $htmlll .= '<div>emprunt fait par ' . $historique->prenom .' '. $historique->nom.' du '.$historique->dateDeb .' au '.$historique->dateFin .'</div>';
+            $htmlll .= '<div style="font-size: 20px ;">Emprunt fait par ' . $historique->prenom .' '. $historique->nom.' du '.$historique->dateDeb .' au '.$historique->dateFin .'</div>';
+
         }
         return $htmlll;
 
@@ -218,126 +243,147 @@ class ListeObjetsController extends BaseController
         foreach ($infos as $info) {
 
             if ($info->nomObjet != null) {
-                $htmlll .= '<div>Nom Objet : ' . $info->nomObjet . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Nom Objet :</b> ' . $info->nomObjet . '</div>';
             }
             if ($info->ram != null) {
-                $htmlll .= '<div>Ram : ' . $info->ram . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Ram :</b> ' . $info->ram . '</div>';
             }
             if ($info->marque != null) {
-                $htmlll .= '<div>Marque : ' . $info->marque . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Marque : </b>' . $info->marque . '</div>';
             }
             if ($info->hddTaille != null) {
-                $htmlll .= '<div>Taille du disque dur : ' . $info->marque . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Taille du disque dur : </b>' . $info->marque . '</div>';
             }
             if ($info->hddVitesse != null) {
-                $htmlll .= '<div>Vitesse du disque dur : ' . $info->hddVitesse . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Vitesse du disque dur : </b>' . $info->hddVitesse . '</div>';
             }
             if ($info->doubleSim != null) {
-                $htmlll .= '<div>Double Sim : ' . $info->doubleSim . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Double Sim : </b>' . $info->doubleSim . '</div>';
             }
             if ($info->cpu != null) {
-                $htmlll .= '<div>Processeur : ' . $info->cpu . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Processeur :</b> ' . $info->cpu . '</div>';
             }
             if ($info->os != null) {
-                $htmlll .= '<div>OS : ' . $info->os . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>OS :</b> ' . $info->os . '</div>';
             }
             if ($info->couleur != null) {
-                $htmlll .= '<div>Couleur : ' . $info->couleur . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Couleur : </b>' . $info->couleur . '</div>';
             }
             if ($info->laser != null) {
-                $htmlll .= '<div>Laser : ' . $info->laser . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Laser :</b> ' . $info->laser . '</div>';
+            }
+            if ($info->armoire != null) {
+                $htmlll .= '<div style="font-size: 20px ;"><b>Armoire :</b> ' . $info->armoire . '</div>';
+            }
+            if ($info->rayonnage != null) {
+                $htmlll .= '<div style="font-size: 20px ;"><b>Rayonnage :</b> ' . $info->rayonnage . '</div>';
             }
             if ($info->resolution != null) {
-                $htmlll .= '<div>Résolution : ' . $info->resolution . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Résolution : </b>' . $info->resolution . '</div>';
             }
             if ($info->typeChargeur != null) {
-                $htmlll .= '<div>Type chargeur : ' . $info->typeChargeur . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Type chargeur :</b> ' . $info->typeChargeur . '</div>';
             }
             if ($info->tempReponse != null) {
-                $htmlll .= '<div>Temp de réponse : ' . $info->tempReponse . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Temp de réponse :</b> ' . $info->tempReponse . '</div>';
             }
             if ($info->mecanique != null) {
-                $htmlll .= '<div>Mécanique : ' . $info->mecanique . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Mécanique : </b>' . $info->mecanique . '</div>';
             }
             if ($info->tailleBatterie != null) {
-                $htmlll .= '<div>Puissance de la batterie : ' . $info->tailleBatterie . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Puissance de la batterie :</b> ' . $info->tailleBatterie . '</div>';
             }
             if ($info->nbPort != null) {
-                $htmlll .= '<div>Nombre de ports : ' . $info->nbPort . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Nombre de ports :</b> ' . $info->nbPort . '</div>';
             }
             if ($info->debit != null) {
-                $htmlll .= '<div>Débit : ' . $info->debit . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Débit :</b> ' . $info->debit . '</div>';
             }
             if ($info->mannageable != null) {
-                $htmlll .= '<div>Mannageable : ' . $info->mannageable . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Mannageable : </b>' . $info->mannageable . '</div>';
             }
             if ($info->categorie != null) {
-                $htmlll .= '<div>Catégorie : ' . $info->categorie . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Catégorie :</b> ' . $info->categorie . '</div>';
             }
             if ($info->nbPrise != null) {
-                $htmlll .= '<div>Nombre de prise : ' . $info->nbPrise . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Nombre de prise :</b> ' . $info->nbPrise . '</div>';
             }
             if ($info->parafoudre != null) {
-                $htmlll .= '<div>Parafoudre : ' . $info->parafoudre . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Parafoudre :</b> ' . $info->parafoudre . '</div>';
             }
             if ($info->interrupteur != null) {
-                $htmlll .= '<div>Interrupteur : ' . $info->interrupteur . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Interrupteur :</b> ' . $info->interrupteur . '</div>';
             }
             if ($info->son != null) {
-                $htmlll .= '<div>Son : ' . $info->son . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Son :</b> ' . $info->son . '</div>';
             }
             if ($info->titre != null) {
-                $htmlll .= '<div>Titre : ' . $info->titre . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Titre :</b> ' . $info->titre . '</div>';
+            }
+            if ($info->site != null) {
+                $htmlll .= '<div style="font-size: 20px ;"><b>Site :</b> ' . $info->site. '</div>';
+            }
+            if ($info->secteur != null) {
+                $htmlll .= '<div style="font-size: 20px ;"><b>Secteur :</b> ' . $info->secteur. '</div>';
             }
             if ($info->puissanceProcesseur != null) {
-                $htmlll .= '<div>Puissance du processeur : ' . $info->puissanceProcesseur . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Puissance du processeur :</b> ' . $info->puissanceProcesseur . '</div>';
             }
             if ($info->marqueProcesseur != null) {
-                $htmlll .= '<div>Marque du processeur : ' . $info->marqueProcesseur . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Marque du processeur :</b> ' . $info->marqueProcesseur . '</div>';
             }
             if ($info->nomProcesseur != null) {
-                $htmlll .= '<div>Nom du processeur : ' . $info->nomProcesseur . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Nom du processeur :</b> ' . $info->nomProcesseur . '</div>';
             }
             if ($info->apAv != null) {
-                $htmlll .= '<div>Appareil photo avant : ' . $info->apAv . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Appareil photo avant : </b>' . $info->apAv . '</div>';
             }
             if ($info->apAr != null) {
-                $htmlll .= '<div>Appareil photo arrière : ' . $info->apAr . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Appareil photo arrière :</b> ' . $info->apAr . '</div>';
             }
             if ($info->typeSim != null) {
-                $htmlll .= '<div>Type sim : ' . $info->typeSim . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Type sim :</b> ' . $info->typeSim . '</div>';
             }
             if ($info->longueur != null) {
-                $htmlll .= '<div>Longueur : ' . $info->longueur . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Longueur :</b> ' . $info->longueur . '</div>';
             }
             if ($info->telecommande != null) {
-                $htmlll .= '<div>Télécommande : ' . $info->telecommande . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Télécommande :</b> ' . $info->telecommande . '</div>';
             }
             if ($info->focal != null) {
-                $htmlll .= '<div>Focal court : ' . $info->focal . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Focal court :</b> ' . $info->focal . '</div>';
             }
             if ($info->descr != null) {
-                $htmlll .= '<div>Description : ' . $info->descr . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Description :</b> ' . $info->descr . '</div>';
             }
             if ($info->fournisseur != null) {
-                $htmlll .= '<div>Créateur : ' . $info->fournisseur . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Créateur :</b> ' . $info->fournisseur . '</div>';
             }
             if ($info->fonctionne != null) {
-                $htmlll .= '<div>Fonctionne : ' . $info->fonctionne . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Fonctionne :</b> ' . $info->fonctionne . '</div>';
             }
             if ($info->vga != null) {
-                $htmlll .= '<div>Vga: ' . $info->vga . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Vga</b>: ' . $info->vga . '</div>';
             }
             if ($info->usb != null) {
-                $htmlll .= '<div>Usb : ' . $info->usb . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Usb :</b>' . $info->usb . '</div>';
             }
             if ($info->ethernet != null) {
-                $htmlll .= '<div>Ethernet : ' . $info->ethernet . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Ethernet : </b>' . $info->ethernet . '</div>';
             }
             if ($info->hdmi != null) {
-                $htmlll .= '<div>Hdmi : ' . $info->hdmi . '</div>';
+                $htmlll .= '<div style="font-size: 20px ;"><b>Hdmi : </b>' . $info->hdmi . '</div>';
             }
+            $htmlll .= '<br>';
+            $htmlll .= '<h2 class="modal-title">Historique de l\'objet </h2>';
+            $htmlll .= '<br>';
         }
+
+        foreach ($historiques as $historique){
+            $htmlll .= '<div style="font-size: 20px ;">Emprunt fait par ' . $historique->prenom .' '. $historique->nom.' du '.$historique->dateDeb .' au '.$historique->dateFin .'</div>';
+
+        }
+
         return $htmlll;
 
     }
@@ -355,7 +401,19 @@ class ListeObjetsController extends BaseController
         $id = $request->get('idObjet');
         Modell::deleteObjet($id);
 
-        return  redirect('/accueil')->with('demenv', 'Objet supprimé');;
+        return  redirect('/accueil')->with('demenv', 'OBJET SUPPRIME');;
+
+    }
+
+    public function emprunter(Request $request){
+        $idObjet = $request->get('idObjet');
+        $idUser = $request->get('idUser');
+        $dateDeb = $request->get('dateDeb');
+        $nom = Modell::getNomById($idUser)->nom;
+        $prenom = Modell::getPreomById($idUser)->prenom;
+        Modell::emprunt($idUser,$nom,$prenom,$dateDeb,$idObjet);
+
+        return  redirect('/accueil')->with('emprunt', 'OBJET EMPRUNTE');
 
     }
 }

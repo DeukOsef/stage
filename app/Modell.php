@@ -58,7 +58,7 @@ class Modell extends Model
     public static function updatepass($login){
 
         $dataUpdate = array();
-        $dataUpdate['mdp'] = Hash::make('azerty');
+        $dataUpdate['mdp'] = Hash::make('pwagon');
 
         DB::table('user')
             ->where(self::getTableUser() . '.login', '=', $login)
@@ -71,7 +71,7 @@ class Modell extends Model
 
     public static function getName($login){
         $nom = DB::table(self::getTableUser())
-            ->select('nom','prenom','idUser','login')
+            ->select('nom','prenom','idUser','login','profil')
             ->where('login', '=', $login)
             ->first();
         return $nom;
@@ -110,6 +110,7 @@ class Modell extends Model
         $dataInsertDemandeCp['idObjet'] = $objet;
         $dataInsertDemandeCp['etat']="1";
         $dataInsertDemandeCp['nomObjet']= Modell::getNomObjet($objet)->nomObjet;
+        $dataInsertDemandeCp['secteur']= "lille";
 
         DB::table('emprunt')->insert($dataInsertDemandeCp);
 
@@ -237,11 +238,11 @@ class Modell extends Model
     }
 
     public static function getUnObjet($nomObjet){
-        $nomObjet =DB::table(self::getTableObjet())
+        $idObjet =DB::table(self::getTableObjet())
             ->select('idObjet')
             ->where('nomObjet', '=', $nomObjet)
             ->first();
-        return $nomObjet;
+        return $idObjet;
     }
 
     public static function getTypeById($idObjet){
@@ -401,6 +402,79 @@ class Modell extends Model
             ->where('idObjet','=',$id)
             ->get();
         return $type;
+    }
+
+    public static function getIdUserByConcat($concat){
+        $type = DB::table(self::getTableUser())
+            ->select('idUser')
+            ->where('nomPrenom','=',$concat)
+            ->first();
+        return $type;
+    }
+
+    public static function getSecteurById($id){
+        $type = DB::table(self::getTableUser())
+            ->select('secteur')
+            ->where('idUser','=',$id)
+            ->first();
+        return $type;
+    }
+
+    public static function getAllUser(){
+        $type = DB::table(self::getTableUser())
+            ->select('idUser','nom','prenom','login','profil','poste','site','secteur')
+            ->get();
+        return $type;
+    }
+
+    public static function deleteUser($idUser){
+        $deldem = DB::table(self::getTableUser())
+            ->select('*')
+            ->where('idUser','=', $idUser)
+            ->delete();
+        return $deldem;
+    }
+    public static function getUserById($id){
+
+        $user = DB::table(self::getTableUser())
+            ->select('idUser','nom','prenom','login','profil','poste','site','secteur','num','matricule')
+            ->where('idUser', '=', $id)
+            ->first();
+
+        return $user;
+    }
+
+    public static function updateUser($idUser,$profil,$poste,$num)
+    {
+        $dataInsertDemandeCp = array();
+        $dataInsertDemandeCp['profil'] = $profil;
+        $dataInsertDemandeCp['poste'] = $poste;
+        $dataInsertDemandeCp['num'] = $num;
+
+        DB::table('user')
+            ->where(self::getTableUser() . '.idUser', '=', $idUser)
+            ->update($dataInsertDemandeCp);
+
+        return 1;
+    }
+
+    public static function createUser($nom,$prenom,$login,$password,$profil,$poste,$num,$matricule)
+    {
+        $dataInsertDemandeCp = array();
+        $dataInsertDemandeCp['nom'] =$nom;
+        $dataInsertDemandeCp['prenom'] = $prenom;
+        $dataInsertDemandeCp['login'] = $login;
+        $dataInsertDemandeCp['mdp'] = Hash::make($password);
+        $dataInsertDemandeCp['profil'] = $profil;
+        $dataInsertDemandeCp['poste'] = $poste;
+        $dataInsertDemandeCp['num'] = $num;
+        $dataInsertDemandeCp['nomPrenom'] = $nom.' '.$prenom;
+        $dataInsertDemandeCp['matricule'] = $matricule;
+        $dataInsertDemandeCp['site'] = 1;
+        $dataInsertDemandeCp['secteur'] = "Villeneuve d'ascq";
+
+        DB::table('user')->insert($dataInsertDemandeCp);
+        return 1;
     }
 }
 

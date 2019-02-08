@@ -6,7 +6,7 @@
                 <div class="card" id="card">
                     <div id="testt" class="card-header">Nouvel emprunt</div>
                     <div id="formm" class="card-body" style="border: solid #DFDFDF">
-                        {{--<form method="POST" action="{{url('/emprunt')}}" enctype="multipart/form-data">--}}
+                        <form method="POST" action="{{url('/emprunt')}}" enctype="multipart/form-data">
                             @csrf
                             @if(session('demenv'))
                                 <div class="form-group row">
@@ -23,6 +23,7 @@
                             {{--</div>--}}
 
                             {{--DROPDOWN WITH SEARCH--}}
+
                             <div class="form-group row">
                                 <label for="idUser" class="col-md-4 col-form-label text-md-right">Agent</label>
                                 <div class="col-md-6">
@@ -41,14 +42,61 @@
                             </div>
 
                             <div class="row">
-                                <label for="codeB"  class="col-md-4 col-form-label text-md-right">Code barre</label>
+                                <label for="codeB"  class="col-md-4 col-form-label text-md-right">Code barre 1</label>
                                 <div class="col-md-6">
-                                    <input id="codeB" type="text" class="form-control" style="color:#495057; background-color:#E9ECEF; border-color:#ced4da; outline:0; -webkit-box-shadow:none;box-shadow:none;" name="codeB" value="">
+                                    <input id="codeB" type="text" class="form-control"  name="codeB" value="">
                                 </div>
                                 <div class="col-md-2">
                                     <a onclick="openModalInfo(event)" id="infoObjet" data-toggle="modal" data-target="#modalInfoObjet" style="display: none;" ><i class="fa fa-info-circle" style="font-size:24px;"></i></a>
                                 </div>
                             </div>
+
+                        <div class="row">
+                            <label for="codeB1"  class="col-md-4 col-form-label text-md-right">Code barre 2</label>
+                            <div class="col-md-6">
+                                <input id="codeB1" type="text" class="form-control"  name="codeB1" value="">
+                            </div>
+                            <div class="col-md-2">
+                                <a onclick="openModalInfo1(event)" id="infoObjet1" data-toggle="modal" data-target="#modalInfoObjet1" style="display: none;" ><i class="fa fa-info-circle" style="font-size:24px;"></i></a>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <label for="codeB2"  class="col-md-4 col-form-label text-md-right">Code barre 3</label>
+                            <div class="col-md-6">
+                                <input id="codeB2" type="text" class="form-control"  name="codeB2" value="">
+                            </div>
+                            <div class="col-md-2">
+                                <a onclick="openModalInfo2(event)" id="infoObjet2" data-toggle="modal" data-target="#modalInfoObjet2" style="display: none;" ><i class="fa fa-info-circle" style="font-size:24px;"></i></a>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <label for="codeB3"  class="col-md-4 col-form-label text-md-right">Code barre 4</label>
+                            <div class="col-md-6">
+                                <input id="codeB3" type="text" class="form-control" name="codeB3" value="">
+                            </div>
+                            <div class="col-md-2">
+                                <a onclick="openModalInfo3(event)" id="infoObjet3" data-toggle="modal" data-target="#modalInfoObjet3" style="display: none;" ><i class="fa fa-info-circle" style="font-size:24px;"></i></a>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <label for="codeB4"  class="col-md-4 col-form-label text-md-right">Code barre 5</label>
+                            <div class="col-md-6">
+                                <input id="codeB4" type="text" class="form-control" name="codeB4" value="">
+                            </div>
+                            <div class="col-md-2">
+                                <a onclick="openModalInfo4(event)" id="infoObjet4" data-toggle="modal" data-target="#modalInfoObjet4" style="display: none;" ><i class="fa fa-info-circle" style="font-size:24px;"></i></a>
+                            </div>
+                        </div>
+
+
+
+
+
+
+
                             <br>
                             <div class="form-group row">
                                 <label for="dateDeb" class="col-md-4 col-form-label text-md-right">date debut</label>
@@ -83,7 +131,7 @@
                                     </button>
                                 </div>
                             </div>
-                        {{--</form>--}}
+                        </form>
                     </div>
                 </div>
             </div>
@@ -109,6 +157,84 @@
         </div>
     </div>
 
+
+    <div class="modal fade" id="modalInfoObjet1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">Caractéristique d'un objet</h2>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="info1">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+    <div class="modal fade" id="modalInfoObjet2">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">Caractéristique d'un objet</h2>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="info2">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+    <div class="modal fade" id="modalInfoObjet3">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">Caractéristique d'un objet</h2>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="info3">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+    <div class="modal fade" id="modalInfoObjet4">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">Caractéristique d'un objet</h2>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="info4">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+
     <script>
 
 
@@ -125,6 +251,57 @@
             });
         }
 
+        function openModalInfo1(){
+            var codeB1 = $("#codeB1").val();
+            $.ajax({
+                url: "{{url('/infoWithCodeB')}}",
+                type: 'POST',
+                data: 'codeB='+ codeB1 + '&_token=' + "{{ csrf_token() }}",
+                success: function (htmlll1) {
+                    $('#info1').html(htmlll1);
+                }
+            });
+        }
+
+
+        function openModalInfo2(){
+            var codeB2 = $("#codeB2").val();
+            $.ajax({
+                url: "{{url('/infoWithCodeB')}}",
+                type: 'POST',
+                data: 'codeB='+ codeB2 + '&_token=' + "{{ csrf_token() }}",
+                success: function (htmlll2) {
+                    $('#info2').html(htmlll2);
+                }
+            });
+        }
+
+
+        function openModalInfo3(){
+            var codeB3 = $("#codeB3").val();
+            $.ajax({
+                url: "{{url('/infoWithCodeB')}}",
+                type: 'POST',
+                data: 'codeB='+ codeB3 + '&_token=' + "{{ csrf_token() }}",
+                success: function (htmlll3) {
+                    $('#info3').html(htmlll3);
+                }
+            });
+        }
+
+        function openModalInfo4(){
+            var codeB4 = $("#codeB4").val();
+            $.ajax({
+                url: "{{url('/infoWithCodeB')}}",
+                type: 'POST',
+                data: 'codeB='+ codeB4 + '&_token=' + "{{ csrf_token() }}",
+                success: function (htmlll4) {
+                    $('#info4').html(htmlll4);
+                }
+            });
+        }
+
+
         $(document).ready(function() {
 
             $('#codeB').on('change', function(e) {
@@ -133,6 +310,42 @@
                     $("#infoObjet").show();
                 }else{
                     $("#infoObjet").css('display', 'none');
+                }
+            });
+
+            $('#codeB1').on('change', function(e) {
+                var codeB1 = $("#codeB1").val();
+                if(codeB1.length != 0){
+                    $("#infoObjet1").show();
+                }else{
+                    $("#infoObjet1").css('display', 'none');
+                }
+            });
+
+            $('#codeB2').on('change', function(e) {
+                var codeB2 = $("#codeB2").val();
+                if(codeB2.length != 0){
+                    $("#infoObjet2").show();
+                }else{
+                    $("#infoObjet2").css('display', 'none');
+                }
+            });
+
+            $('#codeB3').on('change', function(e) {
+                var codeB3 = $("#codeB3").val();
+                if(codeB3.length != 0){
+                    $("#infoObjet3").show();
+                }else{
+                    $("#infoObjet3").css('display', 'none');
+                }
+            });
+
+            $('#codeB4').on('change', function(e) {
+                var codeB4 = $("#codeB4").val();
+                if(codeB4.length != 0){
+                    $("#infoObjet4").show();
+                }else{
+                    $("#infoObjet4").css('display', 'none');
                 }
             });
 
@@ -158,7 +371,7 @@
             console.log(data, $("#listUser option").val());
 
 
-            $('#submit').click(function(e)
+            $('#testttt').click(function(e)
             {
                 e.preventDefault();
                 var value = $('#idUser').val();
